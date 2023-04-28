@@ -47,6 +47,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
         String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         logger.info("date {}", format);
+        logger.info("收到客户端的消息:{}", msg.toString());
         String str = "服务端收到: " + new Date() + " " + msg + "\r\n";
         ByteBuf buf = Unpooled.buffer(str.getBytes().length);
         buf.writeBytes(str.getBytes("GBK"));

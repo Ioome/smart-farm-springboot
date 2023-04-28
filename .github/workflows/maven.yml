@@ -45,7 +45,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/test:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/image:latest
   pull-docker:
       needs: [build]
       name: pull-docker

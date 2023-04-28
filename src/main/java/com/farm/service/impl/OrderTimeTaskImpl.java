@@ -24,7 +24,7 @@ public class OrderTimeTaskImpl {
      * cron表达式：Seconds Minutes Hours Day-ofMonth Month Day-ofWeek [Year]
      * 每 1 分钟触发一次: 0 0/1 * * * ?
      */
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0 0/1 * * ?")
     private void cancelTimeOutOrder () {
         logger.info("测试定时任务 {}", new Date());
     }

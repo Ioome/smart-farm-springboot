@@ -2,8 +2,12 @@ package com.farm.data.nio.server;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.nio.charset.Charset;
 
 /**
  * @name: MyChannelInitializer
@@ -17,12 +21,12 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel (SocketChannel channel) {
-
         logger.info("链接报告开始");
         logger.info("链接报告信息：有一客户端链接到本服务端");
-        logger.info("链接报告IP: {}",channel.localAddress().getHostString());
-        logger.info("链接报告Port: {}",  channel.localAddress().getPort());
+        logger.info("链接报告IP: {}", channel.localAddress().getHostString());
+        logger.info("链接报告Port: {}", channel.localAddress().getPort());
         logger.info("链接报告完毕");
+        channel.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
         channel.pipeline().addLast(new MyServerHandler());
 
     }

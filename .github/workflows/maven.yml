@@ -28,14 +28,7 @@ jobs:
         java-version: '8.0.322+6'
         distribution: 'temurin'
         cache: maven
-    - name: Cache Maven packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys:  ${{ runner.os }}-maven-
     - name: Build with Maven
-      # 执行 shell 指令
       run: mvn -B package -Dmaven.test.skip=true --file pom.xml
     - name: Login to Docker Hub
       uses: docker/login-action@v1
@@ -53,7 +46,6 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/smart-farm-springboot:latest
-          # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
   pull-docker:
       needs: [build]
       name: pull-docker

@@ -11,6 +11,5 @@ import com.farm.service.FarmPermissionService;
  * @date: 2023-04-28 16:56
  * @description: FarmPermissionServiceImpl
  */
-
 public class FarmPermissionServiceImpl extends ServiceImpl<FarmPermissionMapper, FarmPermission> implements FarmPermissionService {
 }

@@ -1,0 +1,64 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+# 端口
+  port: 9241
+# 请求地址
+  servlet:
+        context-path: /farm
+netty:
+  host: 0.0.0.0
+  port: 7397
+# 数据库链接
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://119.91.218.241:9240/smart_farm?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: 9978@wzb
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # 文件上传
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  redis:
+    database: 0
+    host: 119.91.218.241
+    port: 9978
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 3000ms # 连接超时时间（毫秒）
+# 启动打印
+  banner:
+    charset: UTF-8
+    location: classpath:banner.txt
+# 日志打印
+logging:
+  level:
+    com.com.farm: debug
+  file:
+    path: /opt/app/app-logs/farm/
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  typeAliasesPackage: com.farm.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    #springboot 项目mybatis plus 设置 jdbcTypeForNull (oracle数据库需配置JdbcType.NULL, 默认是Other)
+    jdbc-type-for-null: 'null'
+#mybatis:
+#  mapper-locations: classpath*:mapper/*.xml
+#  type-aliases-package: com.farm.entity
+#  configuration:
+#    cache-enabled: true
+#    use-generated-keys: true
+#    default-executor-type: REUSE
+#    use-actual-param-name: true

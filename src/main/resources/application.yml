@@ -44,7 +44,7 @@ logging:
   level:
     com.com.farm: debug
   file:
-    path: /opt/app/app-logs/farm/
+    path: /opt/logs/smart-farm/
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   typeAliasesPackage: com.farm.entity

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.smart.farm</groupId>
-    <artifactId>smart-farm-springboot</artifactId>
+    <artifactId>farm-springboot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>

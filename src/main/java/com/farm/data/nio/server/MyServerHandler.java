@@ -84,7 +84,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught (ChannelHandlerContext ctx, Throwable cause) throws Exception {
         ctx.close();
-        logger.info("异常信息：{}\r\n", cause.getMessage());
+        logger.info("异常信息1：{}\r\n", cause.getMessage());
     }
 
 }

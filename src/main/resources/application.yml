@@ -7,7 +7,7 @@ server:
   servlet:
         context-path: /farm
 netty:
-  host: 0.0.0.0
+  host: 127.0.0.1
   port: 7397
 # 数据库链接
 spring:

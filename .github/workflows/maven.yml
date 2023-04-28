@@ -28,8 +28,6 @@ jobs:
         java-version: '8.0.322+6'
         distribution: 'temurin'
         cache: maven
-    - name: Clean and Build with Maven
-      run: mvn -B clean package --file pom.xml
     - name: Build with Maven
       run: mvn -B package -Dmaven.test.skip=true --file pom.xml
     - name: Login to Docker Hub

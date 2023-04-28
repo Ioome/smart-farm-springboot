@@ -2,7 +2,6 @@ package com.farm.data.nio.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
@@ -49,23 +48,8 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         logger.info("date {}", format);
         logger.info("收到客户端的消息:{}", msg.toString());
-        logger.info("收到的消息为: {}",ctx);
-        Channel channel = ctx.channel();
-        //获取硬件信息
-        logger.info("硬件信息:{}", channel.id());
-        logger.info("硬件信息:{}", channel.remoteAddress());
-        logger.info("硬件信息:{}", channel.localAddress());
-        logger.info("硬件信息:{}", channel.metadata());
-        logger.info("硬件信息:{}", channel.pipeline());
-        logger.info("硬件信息:{}", channel.config());
-        logger.info("硬件信息:{}", channel.eventLoop());
-        logger.info("硬件信息:{}", channel.parent());
-        logger.info("硬件信息:{}", channel.unsafe());
-        logger.info("硬件信息:{}", channel.isActive());
-        logger.info("硬件信息:{}", channel.isWritable());
-        logger.info("硬件信息:{}", channel.isRegistered());
-        logger.info("硬件信息:{}", channel.isWritable());
-        logger.info("硬件信息:{}", channel.isWritable());
+        logger.info("收到的消息为: {}", ctx);
+
         String str = "服务端收到: " + new Date() + " " + msg + "\r\n";
         ByteBuf buf = Unpooled.buffer(str.getBytes().length);
         buf.writeBytes(str.getBytes("GBK"));

@@ -10,7 +10,7 @@ import java.util.List;
  * @name: FarmPermissionMapper
  * @author: sutton
  * @date: 2023-04-27 23:02
- * @description: FarmPermissionMapper
+ * @description: 权限表
  */
 @Mapper
 public interface FarmPermissionMapper extends BaseMapper<FarmPermission> {

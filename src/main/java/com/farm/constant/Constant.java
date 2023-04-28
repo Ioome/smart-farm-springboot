@@ -10,7 +10,7 @@ public class Constant {
     /**
      * 表达是否常量枚举
      *
-     * @author wx
+     * @author sutton
      */
     public interface YesOrNoConstant {
 
@@ -39,7 +39,7 @@ public class Constant {
     /**
      * 表达是否常量枚举
      *
-     * @author wx
+     * @author sutton
      */
     public interface YesOrNoBooleanConstant {
 
@@ -84,7 +84,7 @@ public class Constant {
     /**
      * 状态常量
      *
-     * @author wx
+     * @author sutton
      */
     public interface StatusConstant {
 
@@ -97,6 +97,16 @@ public class Constant {
          * 停用
          */
         Integer DEACTIVATE = 1;
+
+    }
+
+
+    /**
+     * 设备类型
+     * @author sutton
+     */
+    public interface farm_equipment {
+
 
     }
 

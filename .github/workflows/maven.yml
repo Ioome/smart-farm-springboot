@@ -38,11 +38,11 @@ jobs:
         with:
           java-version: '8.0.322+6'
           distribution: 'temurin'
-      #        cache: maven
+          cache: maven
       - name: Build with Maven
         run: mvn -B package -Dmaven.test.skip=true --file pom.xml -X -e
-      # 这将在终端中列出整个工作区的文件列表，以及它们的详细信息。你可以检查输出结果，确保最新的代码已经被正确地检出
-      - run: ls -lR
+      - name: List files in working directory
+        run: ls -lR > file_list.txt
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -56,7 +56,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
+          file: ./dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/smart-farm:latest
   pull-docker:

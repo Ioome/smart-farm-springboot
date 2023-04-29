@@ -1,0 +1,20 @@
+name: Pull Request Notification
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Notify creator
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const { number, user } = context.payload.pull_request;
+            const comment = `@${user.login} Thanks for submitting this pull request!`;
+            return github.issues.createComment({ owner, repo, issue_number: number, body: comment });

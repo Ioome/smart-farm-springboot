@@ -9,10 +9,8 @@ import io.netty.channel.socket.SocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-
-import javax.annotation.Resource;
 import java.net.InetSocketAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,8 +20,7 @@ import java.util.Date;
  * @name: MyServerHandler
  * @date: 2023-04-24 09:48
  */
-
-@Component
+@Service("myServerHandler")
 public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
 
@@ -61,7 +58,6 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         logger.info("date {}", format);
 
-        logger.info("进入 FarmEquipmentServiceImpl saveEquipment 方法");
         logger.info("收到的消息为: {}", ctx);
         logger.info("收到客户端的消息:{}", msg.toString());
         //获取客户端ip
@@ -79,6 +75,8 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         //获取通道 id
         logger.info("通道 id: {}", ctx.channel().id());
 
+
+        farmEquipmentService.saveEquipment(ctx, msg);
         String str = "服务端收到: " + new Date() + " " + msg + "\r\n" + "请与后台人员核对数据";
         ByteBuf buf = Unpooled.buffer(str.getBytes().length);
         buf.writeBytes(str.getBytes("GBK"));

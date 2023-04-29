@@ -19,9 +19,8 @@ public class HexDecoder  extends ByteToMessageDecoder {
         if (in.isReadable()) {
             byte[] data = new byte[in.readableBytes()];
             in.readBytes(data);
-            String hexString = Hex.encodeHexString(data); // 将字节数组转换为16进制字符串
-            // TODO: 解析和处理16进制数据
-            list.add(hexString); // 将解码后的数据添加到输出列表中
+            String hexString = Hex.encodeHexString(data);
+            list.add(hexString);
         }
     }
 }

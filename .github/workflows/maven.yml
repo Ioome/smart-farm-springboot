@@ -24,6 +24,13 @@ jobs:
         # fetch-depth是用来设置Git fetch命令的深度，即从Git仓库中获取的提交的数量
         with:
           fetch-depth: 0
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Show Hash
         run:
           # 展示 哈希

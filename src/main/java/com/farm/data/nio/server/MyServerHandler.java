@@ -8,7 +8,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -25,9 +27,10 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
 
     private final Logger logger = LoggerFactory.getLogger(MyServerHandler.class);
-    @Resource
-    private FarmEquipmentService farmEquipmentService;
 
+
+    @Autowired
+    private FarmEquipmentService farmEquipmentService;
 
     /**
      * 当客户端主动链接服务端的链接后，这个通道就是活跃的了。也就是客户端与服务端建立了通信通道并且可以传输数据

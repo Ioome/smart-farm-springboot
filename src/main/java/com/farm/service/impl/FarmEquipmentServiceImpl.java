@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.net.InetSocketAddress;
 
 /**
  * @name: FarmEquipmentServiceImpl
@@ -34,7 +35,23 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
      */
     @Override
     public void saveEquipment (ChannelHandlerContext ctx, Object msg) {
+        logger.info("进入 FarmEquipmentServiceImpl saveEquipment 方法");
         logger.info("收到的消息为: {}", ctx);
         logger.info("收到客户端的消息:{}", msg.toString());
+        //获取客户端ip
+        InetSocketAddress ipSocket = (InetSocketAddress) ctx.channel().remoteAddress();
+        String clientIp = ipSocket.getAddress().getHostAddress();
+        logger.info("客户端ip: {}", clientIp);
+
+        //获取客户端端口
+        int clientPort = ipSocket.getPort();
+        logger.info("客户端端口: {}", clientPort);
+
+        //获取客户端信息
+        logger.info("服务端收到: {}", msg);
+
+        //获取通道 id
+        logger.info("通道 id: {}", ctx.channel().id());
+
     }
 }

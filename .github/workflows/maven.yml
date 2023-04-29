@@ -24,12 +24,15 @@ jobs:
         # fetch-depth是用来设置Git fetch命令的深度，即从Git仓库中获取的提交的数量
         with:
           fetch-depth: 0
+      - name: Show Hash
+        run:
+          # 展示 哈希
+          git log -1
       # 比较日志
       - name: Show diff
         run:
-            # 展示 哈希
-            git log -1
-            git diff
+          # 比较
+          git diff
       - name: Set up JDK 8
         uses: actions/setup-java@v3
         with:

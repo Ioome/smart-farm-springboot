@@ -42,7 +42,7 @@ spring:
 # 日志打印
 logging:
   level:
-    root: debug
+    com.com.farm: debug
   file:
     path: /opt/logs/smart-farm/
 mybatis-plus:

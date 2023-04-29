@@ -61,17 +61,17 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             farmEquipment.setData(parse.get(5));
         }
 
-        //循环遍历
+        //循环判断
         if (parse.size() < 5) {
             logger.info("解析失败");
             throw new RuntimeException("解析失败");
         }
 
-        //绑定设备
-        Map<String, FarmEquipment> farmEquipmentMap = new HashMap<>();
-        farmEquipmentMap.put(equipmentNumber, farmEquipment);
-        //将 farmEquipmentMap 插入数据库
-        farmEquipmentMapper.insert(farmEquipment);
+//        //绑定设备
+//        Map<String, FarmEquipment> farmEquipmentMap = new HashMap<>();
+//        farmEquipmentMap.put(equipmentNumber, farmEquipment);
+//        //将 farmEquipmentMap 插入数据库
+//        farmEquipmentMapper.insert(farmEquipment);
     }
 
 }

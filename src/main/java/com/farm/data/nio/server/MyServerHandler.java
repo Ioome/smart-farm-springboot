@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 
 import javax.annotation.Resource;
+import java.net.InetSocketAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -60,7 +61,23 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         logger.info("date {}", format);
 
-        farmEquipmentService.saveEquipment(ctx, msg);
+        logger.info("进入 FarmEquipmentServiceImpl saveEquipment 方法");
+        logger.info("收到的消息为: {}", ctx);
+        logger.info("收到客户端的消息:{}", msg.toString());
+        //获取客户端ip
+        InetSocketAddress ipSocket = (InetSocketAddress) ctx.channel().remoteAddress();
+        String clientIp = ipSocket.getAddress().getHostAddress();
+        logger.info("客户端ip: {}", clientIp);
+
+        //获取客户端端口
+        int clientPort = ipSocket.getPort();
+        logger.info("客户端端口: {}", clientPort);
+
+        //获取客户端信息
+        logger.info("服务端收到: {}", msg);
+
+        //获取通道 id
+        logger.info("通道 id: {}", ctx.channel().id());
 
         String str = "服务端收到: " + new Date() + " " + msg + "\r\n" + "请与后台人员核对数据";
         ByteBuf buf = Unpooled.buffer(str.getBytes().length);

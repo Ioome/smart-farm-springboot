@@ -1,12 +1,10 @@
 package com.farm.data.nio.server;
 
+import com.farm.utils.HexDecoder;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.nio.charset.Charset;
 
 /**
  * @name: MyChannelInitializer
@@ -25,7 +23,8 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
         logger.info("链接报告IP: {}", channel.localAddress().getHostString());
         logger.info("链接报告Port: {}", channel.localAddress().getPort());
         logger.info("链接报告完毕");
-        channel.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
+//        channel.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
+        channel.pipeline().addLast(new HexDecoder());
         channel.pipeline().addLast(new MyServerHandler());
 
     }

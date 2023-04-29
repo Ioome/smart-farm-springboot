@@ -32,7 +32,7 @@ jobs:
       - name: Show diff
         run:
           # 比较
-          git diff
+          git diff HEAD
       - name: Set up JDK 8
         uses: actions/setup-java@v3
         with:

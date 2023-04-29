@@ -71,8 +71,9 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         //获取通道 id
         logger.info("通道 id: {}", ctx.channel().id());
 
+        farmEquipmentService.saveEquipment(ctx, msg);
 
-        String str = "服务端收到: " + new Date() + " " + msg + "\r\n";
+        String str = "服务端收到: " + new Date() + " " + msg + "\r\n"+"请与后台人员核对数据";
         ByteBuf buf = Unpooled.buffer(str.getBytes().length);
         buf.writeBytes(str.getBytes("GBK"));
         ctx.writeAndFlush(buf);

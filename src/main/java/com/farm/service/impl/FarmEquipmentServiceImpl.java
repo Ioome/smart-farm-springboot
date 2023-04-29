@@ -1,9 +1,12 @@
 package com.farm.service.impl;
 
+import cn.hutool.core.util.ObjUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.po.FarmEquipment;
 import com.farm.mapper.FarmEquipmentMapper;
 import com.farm.service.FarmEquipmentService;
+import com.farm.utils.EquipmentUtils;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,12 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static cn.hutool.core.util.ObjectUtil.isEmpty;
+import static cn.hutool.core.util.ObjectUtil.isNotNull;
 
 /**
  * @name: FarmEquipmentServiceImpl
@@ -35,7 +44,34 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
      */
     @Override
     public void saveEquipment (ChannelHandlerContext ctx, Object msg) {
+        logger.info("saveEquipment............");
+        logger.info("收到的消息为: {}", ctx);
+        logger.info("收到客户端的消息:{}", msg.toString());
 
+        String msgStr = msg.toString();
+        List<String> parse = EquipmentUtils.splitString(msgStr, "-");
+        if (isEmpty(parse)) {
+            logger.info("解析失败");
+            return;
+        }
+        String equipmentNumber = ctx.channel().id().toString();
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getChannelId, equipmentNumber));
+        if (isNotNull(farmEquipment)) {
+            logger.info("设备已经存在");
+            farmEquipment.setData(parse.get(5));
+        }
 
+        //循环遍历
+        if (parse.size() < 5) {
+            logger.info("解析失败");
+            throw new RuntimeException("解析失败");
+        }
+
+        //绑定设备
+        Map<String, FarmEquipment> farmEquipmentMap = new HashMap<>();
+        farmEquipmentMap.put(equipmentNumber, farmEquipment);
+        //将 farmEquipmentMap 插入数据库
+        farmEquipmentMapper.insert(farmEquipment);
     }
+
 }

@@ -16,13 +16,15 @@ import java.util.Date;
  * @date 2023-04-28
  */
 @Data
-@AllArgsConstructor
 @ApiModel("farm_equipment")
 public class FarmEquipment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(type = IdType.AUTO)
+    /**
+     * 主键
+     */
     @ApiModelProperty("主键")
     private Long id;
 
@@ -103,4 +105,22 @@ public class FarmEquipment implements Serializable {
      */
     @ApiModelProperty("删除（null.正常)")
     private Date deleteTime;
+
+    /**
+     * 客户端ip
+     */
+    @ApiModelProperty("客户端ip")
+    private String clientIp;
+
+    /**
+     * 客户端端口
+     */
+    @ApiModelProperty("客户端端口")
+    private String clientPort;
+
+    @ApiModelProperty("通道id")
+    private String channelId;
+
+    @ApiModelProperty("数据")
+    private String data;
 }

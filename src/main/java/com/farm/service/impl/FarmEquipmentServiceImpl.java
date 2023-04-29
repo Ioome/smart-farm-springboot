@@ -54,6 +54,9 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             logger.info("解析失败");
             return;
         }
+        for (String param : parse) {
+            logger.info("解析后的参数:{}", param);
+        }
         String equipmentNumber = ctx.channel().id().toString();
         FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getChannelId, equipmentNumber));
         if (isNotNull(farmEquipment)) {
@@ -67,10 +70,12 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             throw new RuntimeException("解析失败");
         }
 
-//        //绑定设备
+        //绑定设备
 //        Map<String, FarmEquipment> farmEquipmentMap = new HashMap<>();
-//        farmEquipmentMap.put(equipmentNumber, farmEquipment);
-//        //将 farmEquipmentMap 插入数据库
+//        FarmEquipment data = new FarmEquipment();
+//        data.setData(parse.get(4));
+//        data.setChannelId(equipmentNumber);
+//        farmEquipmentMap.put(equipmentNumber, data);
 //        farmEquipmentMapper.insert(farmEquipment);
     }
 

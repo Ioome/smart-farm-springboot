@@ -27,6 +27,7 @@ jobs:
       # 比较日志
       - name: Show diff
         run:
+            # 展示 哈希
             git log -1
             git diff
       - name: Set up JDK 8

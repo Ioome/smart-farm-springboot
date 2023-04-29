@@ -28,7 +28,7 @@ jobs:
       - name: Show diff
         run:
             git log -1
-            git diff --name-only HEAD^ HEAD
+            git diff
       - name: Set up JDK 8
         uses: actions/setup-java@v3
         with:

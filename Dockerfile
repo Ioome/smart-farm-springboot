@@ -21,4 +21,5 @@ EXPOSE  9241
 EXPOSE  7397
 EXPOSE  8080
 #指定docker容器启动时运行jar包
-ENTRYPOINT["java","-jar","app/app.jar"]
+ENTRYPOINT["java","-jar"]
+CMD ["app/app.jar"]

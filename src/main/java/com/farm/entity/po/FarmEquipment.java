@@ -118,9 +118,15 @@ public class FarmEquipment implements Serializable {
     @ApiModelProperty("客户端端口")
     private String clientPort;
 
+    /**
+     * 通道id
+     */
     @ApiModelProperty("通道id")
     private String channelId;
 
+    /**
+     * 数据
+     */
     @ApiModelProperty("数据")
     private String data;
 }

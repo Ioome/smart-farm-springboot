@@ -13,13 +13,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.net.InetSocketAddress;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static cn.hutool.core.util.ObjectUtil.isEmpty;
 import static cn.hutool.core.util.ObjectUtil.isNotNull;
+import static java.util.Objects.isNull;
 
 /**
  * @name: FarmEquipmentServiceImpl
@@ -54,6 +57,9 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             logger.info("解析失败");
             return;
         }
+        //将数据除以10 parse 4 除以10
+        BigDecimal finalData = new BigDecimal(parse.get(4)).divide(new BigDecimal(10));
+        logger.info("解析后的数据:{}", finalData);
         for (String param : parse) {
             logger.info("解析后的参数:{}", param);
         }
@@ -61,7 +67,10 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getChannelId, equipmentNumber));
         if (isNotNull(farmEquipment)) {
             logger.info("设备已经存在");
-            farmEquipment.setData(parse.get(5));
+            farmEquipment.setSendTime(new Date());
+            farmEquipment.setData(String.valueOf(finalData));
+            //更新
+            farmEquipmentMapper.update(farmEquipment, new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getChannelId, equipmentNumber));
         }
 
         //循环判断
@@ -71,12 +80,19 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         }
 
         //绑定设备
-//        Map<String, FarmEquipment> farmEquipmentMap = new HashMap<>();
-//        FarmEquipment data = new FarmEquipment();
-//        data.setData(parse.get(4));
-//        data.setChannelId(equipmentNumber);
-//        farmEquipmentMap.put(equipmentNumber, data);
-//        farmEquipmentMapper.insert(farmEquipment);
+        if (isNull(farmEquipment)) {
+            FarmEquipment data = new FarmEquipment();
+            data.setData(String.valueOf(finalData));
+            data.setClientIp(((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().getHostAddress());
+            data.setChannelId(equipmentNumber);
+            data.setEquipmentNumber(parse.get(0));
+            data.setEquipmentType(parse.get(1));
+            data.setEquipmentName(parse.get(2));
+
+            data.setEquipmentStatus(parse.get(3));
+            data.setClientPort(String.valueOf(((InetSocketAddress) ctx.channel().remoteAddress()).getPort()));
+            farmEquipmentMapper.insert(data);
+        }
     }
 
 }

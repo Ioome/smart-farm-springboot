@@ -79,10 +79,16 @@ public class BigDataController {
         return ResponseResult.success();
     }
 
-    //TODO: 土壤温湿度
+
     @ApiOperation(value = "获取土壤温湿度")
-    @RequestMapping("/getAirHumidity")
+    @RequestMapping("/getLandHumidity")
     public Object getLandHumidity () {
+        return ResponseResult.success();
+    }
+
+    @ApiOperation(value = "获取土壤温湿度")
+    @RequestMapping("/getAirTemperature")
+    public Object getLandTemperature () {
         return ResponseResult.success();
     }
 

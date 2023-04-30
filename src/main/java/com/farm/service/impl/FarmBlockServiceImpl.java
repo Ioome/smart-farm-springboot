@@ -1,13 +1,18 @@
 package com.farm.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
 import com.farm.mapper.FarmBlockMapper;
 import com.farm.service.FarmBlockService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
+
+import static java.util.Objects.isNull;
 
 /**
  * @name: FarmBlockServiceImpl
@@ -18,7 +23,7 @@ import java.util.List;
 @Service
 public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock> implements FarmBlockService {
 
-    @Autowired
+    @Resource
     private FarmBlockMapper farmBlockMapper;
 
 
@@ -50,7 +55,27 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
      * @return 返回删除后的信息
      */
     @Override
-    public Object deleteById (Integer id) {
+    public Object deleteById (Integer id) throws Exception {
+        FarmBlock farmBlock = farmBlockMapper.selectById(id);
+        if (isNull(farmBlock)) {
+            throw new Exception("数据不存在");
+        }
         return farmBlockMapper.deleteById(id);
+    }
+
+    /**
+     * 分页查询区块
+     *
+     * @param dto 分页信息
+     * @return 区块列表List
+     */
+    @Override
+    public List<FarmBlock> getBlockList (FarmBlockDto dto) {
+        Page<FarmBlock> page = farmBlockMapper.selectPage(dto.getPageObj(), new QueryWrapper<FarmBlock>()
+                .lambda()
+                .like(FarmBlock::getCode, dto.getCode())
+                .eq(FarmBlock::getArea, dto.getArea())
+                .eq(FarmBlock::getStatus, dto.getStatus()));
+        return page.getRecords();
     }
 }

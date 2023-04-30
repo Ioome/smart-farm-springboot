@@ -22,6 +22,7 @@ public class PageEntity implements Serializable {
      */
     @ApiModelProperty("总数")
     @TableField(exist = false)
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 
     protected long total = 0;
@@ -31,7 +32,9 @@ public class PageEntity implements Serializable {
 
     @ApiModelProperty("每页显示条数，默认 10")
     @TableField(exist = false)
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     protected long size = 10;
 
     /**
@@ -39,7 +42,9 @@ public class PageEntity implements Serializable {
      */
     @ApiModelProperty("当前页")
     @TableField(exist = false)
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     protected long page = 1;
 
 
@@ -48,7 +53,9 @@ public class PageEntity implements Serializable {
      */
     @ApiModelProperty("mybatis-plus 自动查总数标识")
     @TableField(exist = false)
+
     @JsonIgnore
+
     protected boolean searchCount = true;
 
 
@@ -61,8 +68,9 @@ public class PageEntity implements Serializable {
         return new Page<>(p, s, searchCount);
     }
 
-
     public <E> Page<E> getPageObj (long p, long s, boolean searchCount) {
         return new Page<>(p, s, searchCount);
     }
+
+
 }

@@ -1,22 +1,16 @@
 package com.farm.controller;
 
-import com.farm.entity.po.FarmAdmin;
+import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
 import com.farm.exception.FarmExceptionEnum;
 import com.farm.service.FarmBlockService;
 import com.farm.utils.ResponseResult;
-import com.farm.validation.group.RegisterGroup;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -30,7 +24,7 @@ import java.util.List;
 @RequestMapping("/api/block")
 public class FarmBlockController {
 
-    @Autowired
+    @Resource
     private FarmBlockService farmBlockService;
 
 
@@ -50,6 +44,13 @@ public class FarmBlockController {
     }
 
 
+    @ApiOperation(value = "分页查询区块")
+    @PostMapping(value = "/getBlockList")
+    public Object getBloackList (@RequestBody FarmBlockDto dto) {
+        return ResponseResult.success(farmBlockService.getBlockList(dto));
+    }
+
+
     /**
      * <a href="http://localhost:9241/api/block/getOne">返回区块</a>
      *
@@ -58,7 +59,7 @@ public class FarmBlockController {
      * @return block
      */
     @ApiOperation(value = "返回某个区块的信息")
-    @GetMapping(value = "/getOne")
+    @PostMapping(value = "/getOne")
     public Object getOne (@RequestBody FarmBlock farmBlock, BindingResult bindingResult) {
         FarmBlock block = farmBlockService.getOne(farmBlock.getId());
         return ResponseResult.success(block);
@@ -86,8 +87,11 @@ public class FarmBlockController {
      * @param id 逻辑删除
      * @return block
      */
+    @ApiOperation(value = "删除区块通过id")
     @RequestMapping("/delete")
-    public Object delete (Integer id) {
-        return farmBlockService.deleteById(id);
+    public Object delete (@RequestBody FarmBlockDto param) throws Exception {
+        farmBlockService.deleteById(param.getId());
+        return ResponseResult.success();
     }
+
 }

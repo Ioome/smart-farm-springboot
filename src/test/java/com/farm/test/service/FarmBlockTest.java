@@ -27,4 +27,10 @@ class FarmBlockTest {
         logger.info("farmBlockMapper: {}", farmBlockMapper);
         logger.info("farmBlockMapper.selectById(1): {}", farmBlockMapper.selectById(1));
     }
+
+
+    @Test
+    void deleteById () {
+        farmBlockMapper.deleteById(1);
+    }
 }

@@ -42,9 +42,10 @@ spring:
 # 日志打印
 logging:
   level:
-    com.com.farm: debug
+    root: debug
   file:
     path: /opt/logs/smart-farm/
+debug: false
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   typeAliasesPackage: com.farm.entity
@@ -58,3 +59,4 @@ mybatis-plus:
     db-config:
       logic-not-delete-value: "null"
       logic-delete-value: now()
+      logic-delete-field: delete_time

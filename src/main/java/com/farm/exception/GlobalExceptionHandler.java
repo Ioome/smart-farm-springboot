@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Object exceptionHandler (Exception e) {
-        logger.info("全局异常捕获>>> {}", e);
-        return ResponseResult.fail(FarmExceptionEnum.NAME_EXISTED.getCode(), FarmExceptionEnum.NAME_EXISTED.getMessage());
+        logger.info("捕获到异常: {}", e.getMessage());
+        return ResponseResult.fail(e.getMessage());
     }
 }

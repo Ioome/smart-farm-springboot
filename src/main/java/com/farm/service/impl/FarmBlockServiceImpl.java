@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.po.FarmBlock;
 import com.farm.mapper.FarmBlockMapper;
 import com.farm.service.FarmBlockService;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
 /**

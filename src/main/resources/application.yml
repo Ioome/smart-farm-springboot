@@ -1,11 +1,11 @@
 server:
   tomcat:
     uri-encoding: UTF-8
-# 端口
+  # 端口
   port: 9241
-# 请求地址
+  # 请求地址
   servlet:
-        context-path: /farm
+    context-path: /farm
 netty:
   host: 0.0.0.0
   port: 7397
@@ -35,7 +35,7 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 3000ms # 连接超时时间（毫秒）
-# 启动打印
+  # 启动打印
   banner:
     charset: UTF-8
     location: classpath:banner.txt
@@ -54,11 +54,7 @@ mybatis-plus:
     call-setters-on-nulls: true
     #springboot 项目mybatis plus 设置 jdbcTypeForNull (oracle数据库需配置JdbcType.NULL, 默认是Other)
     jdbc-type-for-null: 'null'
-#mybatis:
-#  mapper-locations: classpath*:mapper/*.xml
-#  type-aliases-package: com.farm.entity
-#  configuration:
-#    cache-enabled: true
-#    use-generated-keys: true
-#    default-executor-type: REUSE
-#    use-actual-param-name: true
+  global-config:
+    db-config:
+      logic-not-delete-value: "null"
+      logic-delete-value: now()

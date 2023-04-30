@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @description: FarmBlockTest
  */
 @SpringBootTest
-public class FarmBlockTest {
+class FarmBlockTest {
 
     private final Logger logger = LoggerFactory.getLogger(FarmBlockTest.class);
 

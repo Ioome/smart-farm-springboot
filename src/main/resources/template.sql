@@ -102,7 +102,7 @@ CREATE TABLE `farm_block`
     PRIMARY KEY (`id`),
     UNIQUE KEY `code` (`code`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 7
+  AUTO_INCREMENT = 0
   DEFAULT CHARSET = utf8 COMMENT ='block';
 
 

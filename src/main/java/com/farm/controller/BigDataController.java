@@ -5,7 +5,6 @@ import com.farm.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +20,6 @@ import javax.annotation.Resource;
 @Slf4j
 @RestController
 @RequestMapping("/data")
-@Api(value = "BigDataController", tags = "data Interface")
 public class BigDataController {
 
     @Resource
@@ -86,14 +84,14 @@ public class BigDataController {
     }
 
 
-    @ApiOperation(value = "获取土壤温湿度")
+    @ApiOperation(value = "获取土壤湿度")
     @RequestMapping("/getLandHumidity")
     public Object getLandHumidity () {
         return ResponseResult.success();
     }
 
-    @ApiOperation(value = "获取土壤温湿度")
-    @RequestMapping("/getAirTemperature")
+    @ApiOperation(value = "获取土壤湿度")
+    @RequestMapping("/getLandTemperature")
     public Object getLandTemperature () {
         return ResponseResult.success();
     }

@@ -21,4 +21,5 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
      * @param msg         消息
      */
     void saveEquipment ( ChannelHandlerContext ctx, Object msg);
+
 }

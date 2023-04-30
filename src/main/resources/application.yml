@@ -42,7 +42,7 @@ spring:
 # 日志打印
 logging:
   level:
-    root: debug
+    com: debug
   file:
     path: /opt/logs/smart-farm/
 debug: false

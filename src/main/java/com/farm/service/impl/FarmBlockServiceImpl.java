@@ -79,7 +79,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
                 .eq(StringUtils.isNoneBlank(dto.getStatus()), FarmBlock::getStatus, dto.getStatus())
                 .le(StringUtils.isNoneBlank(dto.getStartTime()), FarmBlock::getCreatedTime, dto.getStartTime())
                 .ge(StringUtils.isNoneBlank(dto.getEndTime()), FarmBlock::getCreatedTime, dto.getEndTime())
-                .orderByDesc(FarmBlock::getCreatedTime);
+                .orderByDesc(FarmBlock::getCreatedTime));
         return page.getRecords();
     }
 }

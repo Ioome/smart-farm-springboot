@@ -68,6 +68,19 @@ public class FarmBlockController extends BaseController {
 
 
     /**
+     * <a href="http://localhost:9241/api/block/delete">...</a>
+     *
+     * @return block
+     */
+    @ApiOperation(value = "删除区块通过id")
+    @RequestMapping("/delete")
+    public Object delete (@RequestBody FarmBlockDto param) throws Exception {
+        farmBlockService.deleteById(param.getId());
+        return ResponseResult.success();
+    }
+
+
+    /**
      * <a href="http://localhost:9241/api/block/register">新增区块</a>
      *
      * @param farmBlock     区块信息
@@ -81,17 +94,5 @@ public class FarmBlockController extends BaseController {
         return ResponseResult.success(null);
     }
 
-
-    /**
-     * <a href="http://localhost:9241/api/block/delete">...</a>
-     *
-     * @return block
-     */
-    @ApiOperation(value = "删除区块通过id")
-    @RequestMapping("/delete")
-    public Object delete (@RequestBody FarmBlockDto param) throws Exception {
-        farmBlockService.deleteById(param.getId());
-        return ResponseResult.success();
-    }
 
 }

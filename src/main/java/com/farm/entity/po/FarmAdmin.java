@@ -3,10 +3,14 @@ package com.farm.entity.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.farm.validation.TelephoneNumber;
+import com.farm.validation.group.RegisterGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -30,6 +34,7 @@ public class FarmAdmin implements Serializable {
      * 用户名
      */
     @ApiModelProperty("用户名")
+    @NotEmpty(message = "用户名不能为空", groups = {RegisterGroup.class})
     private String username;
 
     /**
@@ -42,6 +47,7 @@ public class FarmAdmin implements Serializable {
      * 密码
      */
     @ApiModelProperty("密码")
+    @NotEmpty(message = "密码不能为空", groups = {RegisterGroup.class})
     private String password;
 
     /**
@@ -54,6 +60,8 @@ public class FarmAdmin implements Serializable {
      * 手机号
      */
     @ApiModelProperty("手机号")
+    @TelephoneNumber(message = "手机号格式不正确", groups = {RegisterGroup.class})
+    @NotEmpty(message = "手机号不能为空", groups = {RegisterGroup.class})
     private String phone;
 
     /**
@@ -78,6 +86,8 @@ public class FarmAdmin implements Serializable {
      * 邮箱
      */
     @ApiModelProperty("邮箱")
+    @NotEmpty(message = "邮箱不能为空", groups = {RegisterGroup.class})
+    @Email(message = "邮箱格式不正确", groups = {RegisterGroup.class})
     private String email;
 
     /**

@@ -4,12 +4,14 @@ import com.farm.entity.po.FarmAdmin;
 import com.farm.exception.FarmExceptionEnum;
 import com.farm.service.FarmAdminService;
 import com.farm.utils.ResponseResult;
+import com.farm.validation.group.RegisterGroup;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,18 +38,32 @@ public class FarmUserAdminController {
     private FarmAdminService farmAdminService;
 
 
+    /**
+     * <a href="http://localhost:9241/api/admin/register">...</a>
+     *
+     * @param umsAdminParam 注册信息
+     * @param result        返回结果
+     * @return 返回 json
+     */
     @ApiOperation(value = "用户注册")
     @PostMapping(value = "/register")
-    @ResponseBody
-    public Object register (@RequestBody FarmAdmin umsAdminParam, BindingResult result) {
+    @Transactional(rollbackFor = Exception.class)
+    public Object register (@Validated(RegisterGroup.class) @RequestBody FarmAdmin umsAdminParam, BindingResult result) {
         FarmAdmin umsAdmin = farmAdminService.register(umsAdminParam);
         if (umsAdmin == null) {
             ResponseResult.fail(FarmExceptionEnum.LOGIN_ERROR.getMessage());
         }
-        return ResponseResult.success(umsAdmin);
+        return ResponseResult.success();
     }
 
 
+    /**
+     * <a href="http://localhost:9241/api/admin/login">...</a>
+     *
+     * @param farmAdmin 登录 账户 密码
+     * @param result    返回结果
+     * @return 返回 json
+     */
     @ApiOperation(value = "登录以后返回token")
     @PostMapping(value = "/login")
     @ResponseBody
@@ -63,6 +79,11 @@ public class FarmUserAdminController {
     }
 
 
+    /**
+     * <a href="http://localhost:9241/api/admin/logout">...</a>
+     *
+     * @return 返回 结果
+     */
     @ApiOperation(value = "退出登录")
     @PostMapping(value = "/logout")
     @Transactional(rollbackFor = Exception.class)

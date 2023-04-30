@@ -11,7 +11,6 @@ import com.farm.utils.RedisCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,16 +34,16 @@ import java.util.Objects;
 public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin> implements FarmAdminService {
     private static final Logger LOGGER = LoggerFactory.getLogger(FarmAdminServiceImpl.class);
 
-    @Autowired
+    @Resource
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
     @Resource
     private FarmAdminMapper adminMapper;
 
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
 
     /**
@@ -68,12 +67,10 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         BeanUtils.copyProperties(umsAdminParam, farmAdmin);
         farmAdmin.setCreatedTime(new Date());
         farmAdmin.setStatus(1);
-        //查询是否有相同用户名的用户
         List<FarmAdmin> umsAdminList = adminMapper.selectList(new QueryWrapper<FarmAdmin>().lambda().eq(FarmAdmin::getUsername, umsAdminParam.getUsername()));
         if (!umsAdminList.isEmpty()) {
             throw new RuntimeException("该用户名已存在");
         }
-        //将密码进行加密操作
         String encodePassword = passwordEncoder.encode(farmAdmin.getPassword());
         farmAdmin.setPassword(encodePassword);
         adminMapper.insert(farmAdmin);

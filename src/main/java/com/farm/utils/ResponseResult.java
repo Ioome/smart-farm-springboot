@@ -30,7 +30,10 @@ public class ResponseResult<T> implements Serializable {
 
     private String status;
 
-
+    /**
+     * 总数
+     */
+    private Long total;
     private String message;
 
     /**
@@ -57,6 +60,8 @@ public class ResponseResult<T> implements Serializable {
      * @return response result
      */
     public static <T> ResponseResult<T> success (T data) {
+        String[] zero = new String[0];
+
         return ResponseResult.<T>builder().data(data).message(ResponseStatus.SUCCESS.getDescription()).status(ResponseStatus.SUCCESS.getResponseCode()).timestamp(System.currentTimeMillis()).build();
     }
 

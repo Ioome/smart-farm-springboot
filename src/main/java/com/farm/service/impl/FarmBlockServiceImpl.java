@@ -7,6 +7,7 @@ import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
 import com.farm.mapper.FarmBlockMapper;
 import com.farm.service.FarmBlockService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -73,9 +74,12 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
     public List<FarmBlock> getBlockList (FarmBlockDto dto) {
         Page<FarmBlock> page = farmBlockMapper.selectPage(dto.getPageObj(), new QueryWrapper<FarmBlock>()
                 .lambda()
-                .like(FarmBlock::getCode, dto.getCode())
-                .eq(FarmBlock::getArea, dto.getArea())
-                .eq(FarmBlock::getStatus, dto.getStatus()));
+                .like(StringUtils.isNoneBlank(dto.getCode()), FarmBlock::getCode, dto.getCode())
+                .eq(StringUtils.isNoneBlank(dto.getArea()), FarmBlock::getArea, dto.getArea())
+                .eq(StringUtils.isNoneBlank(dto.getStatus()), FarmBlock::getStatus, dto.getStatus())
+                .le(StringUtils.isNoneBlank(dto.getStartTime()), FarmBlock::getCreatedTime, dto.getStartTime())
+                .ge(StringUtils.isNoneBlank(dto.getEndTime()), FarmBlock::getCreatedTime, dto.getEndTime())
+                .orderByDesc(FarmBlock::getCreatedTime);
         return page.getRecords();
     }
 }

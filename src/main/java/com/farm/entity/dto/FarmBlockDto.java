@@ -19,7 +19,9 @@ public class FarmBlockDto extends PageEntity {
 
 
     @ApiModelProperty("筛选条件： 时间")
-    private String time;
+    private String startTime;
+    @ApiModelProperty("筛选条件： 时间")
+    private String endTime;
 
     @ApiModelProperty("筛选条件： 面积")
     private String area;

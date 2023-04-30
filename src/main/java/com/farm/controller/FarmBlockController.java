@@ -3,6 +3,7 @@ package com.farm.controller;
 import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
 import com.farm.exception.FarmExceptionEnum;
+import com.farm.restful.BaseController;
 import com.farm.service.FarmBlockService;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +23,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/api/block")
-public class FarmBlockController {
+public class FarmBlockController extends BaseController {
 
     @Resource
     private FarmBlockService farmBlockService;
@@ -40,14 +41,14 @@ public class FarmBlockController {
         if (farmBlocksListAll == null) {
             ResponseResult.fail(FarmExceptionEnum.LOGIN_ERROR.getMessage());
         }
-        return ResponseResult.success(farmBlocksListAll);
+        return toResult(farmBlocksListAll);
     }
 
 
     @ApiOperation(value = "分页查询区块")
     @PostMapping(value = "/getBlockList")
-    public Object getBloackList (@RequestBody FarmBlockDto dto) {
-        return ResponseResult.success(farmBlockService.getBlockList(dto));
+    public Object getBlockList (@RequestBody FarmBlockDto dto) {
+        return toResult(farmBlockService.getBlockList(dto));
     }
 
 
@@ -84,7 +85,6 @@ public class FarmBlockController {
     /**
      * <a href="http://localhost:9241/api/block/delete">...</a>
      *
-     * @param id 逻辑删除
      * @return block
      */
     @ApiOperation(value = "删除区块通过id")

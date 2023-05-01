@@ -2,6 +2,7 @@ package com.farm.entity.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.farm.restful.PageEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -104,6 +105,7 @@ public class FarmEquipmentDto extends PageEntity implements Serializable {
      * 删除（null.正常)
      */
     @ApiModelProperty("删除（null.正常)")
+    @TableLogic
     private Date deleteTime;
 
     /**

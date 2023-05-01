@@ -54,11 +54,11 @@ public class FarmEquipmentController extends BaseController {
      * 删除
      */
     @PostMapping("/delete")
-    public Object delete (int id) {
-        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().eq("farmEquipment_id", id));
+    public Object delete (@RequestBody FarmEquipmentDto dto) {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getId, dto.getId()));
         if (farmEquipment != null) {
-            farmEquipmentMapper.deleteById(id);
-            return ResponseResult.success("删除成功");
+            farmEquipmentMapper.deleteById(dto.getId());
+            return ResponseResult.success();
         } else {
             return ResponseResult.fail("没有找到该对象");
         }
@@ -68,8 +68,8 @@ public class FarmEquipmentController extends BaseController {
      * 查询
      */
     @PostMapping("/find")
-    public Object find (int id) {
-        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().eq("farmEquipment_id", id));
+    public Object find (FarmEquipment dto) {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getId, dto));
         if (farmEquipment != null) {
             return ResponseResult.success(farmEquipment);
         } else {
@@ -83,18 +83,11 @@ public class FarmEquipmentController extends BaseController {
     @PostMapping("/list")
     public Object list (@RequestBody FarmEquipmentDto dto) {
         log.info("page:" + dto.getPageObj().getPages() + "-limit:" + dto.getPageObj().getSize() + "-json:" + JSON.toJSONString(dto));
-        //条件构造器
-        QueryWrapper<FarmEquipment> queryWrapper = new QueryWrapper<FarmEquipment>();
-        if (StringUtils.isNotEmpty(dto.getEquipmentName())) {
-            FarmEquipment farmEquipment = JSON.parseObject(dto.getEquipmentName(), FarmEquipment.class);
-            queryWrapper.eq(StringUtils.isNoneEmpty(farmEquipment.getEquipmentName()), "farmEquipment_name", farmEquipment.getEquipmentName());
-        }
         //执行分页
-        IPage<FarmEquipment> pageList = farmEquipmentMapper.selectPage(dto.getPageObj(), queryWrapper);
+        IPage<FarmEquipment> pageList = farmEquipmentMapper.selectPage(dto.getPageObj(), new QueryWrapper<FarmEquipment>().lambda().like(StringUtils.isNotBlank(dto.getEquipmentName()), FarmEquipment::getEquipmentName, dto.getEquipmentName()));
         //返回结果
         return toResult(pageList);
     }
-
 
 
 }

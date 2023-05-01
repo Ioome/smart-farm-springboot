@@ -103,7 +103,11 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
      */
     @Override
     public List<FarmEquipment> getEqupmentLists () {
-        return farmEquipmentMapper.selectList(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentStatus, Constant.FarmEquipmentTypeConstant.START_THE));
+        List<FarmEquipment> farmEquipments = farmEquipmentMapper.selectList(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentStatus, Constant.FarmEquipmentTypeConstant.START_THE));
+        if (isEmpty(farmEquipments)) {
+            throw new MyException("没有设备");
+        }
+        return farmEquipments;
     }
 
 

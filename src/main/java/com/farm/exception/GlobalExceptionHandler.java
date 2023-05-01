@@ -32,13 +32,13 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Object handleException (Exception e) {
         log.error("Default Exception: ", e);
-        return ResultModel.error("系统异常，请从控制台或日志中查看具体错误信息");
+        return ResultModel.error("后台异常");
     }
 
     @ExceptionHandler(MyException.class)
     @ResponseBody
     public Object handleException (MyException e) {
-        log.error("MisMallException: ", e);
+        log.error("MyException: ", e);
         return ResultModel.error(e.getMessage() );
     }
 

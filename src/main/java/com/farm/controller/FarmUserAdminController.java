@@ -2,6 +2,7 @@ package com.farm.controller;
 
 import com.farm.entity.po.FarmAdmin;
 import com.farm.exception.FarmExceptionEnum;
+import com.farm.exception.MyException;
 import com.farm.service.FarmAdminService;
 import com.farm.utils.ResponseResult;
 import com.farm.validation.group.RegisterGroup;
@@ -51,7 +52,7 @@ public class FarmUserAdminController {
     public Object register (@Validated(RegisterGroup.class) @RequestBody FarmAdmin umsAdminParam, BindingResult result) {
         FarmAdmin umsAdmin = farmAdminService.register(umsAdminParam);
         if (umsAdmin == null) {
-            ResponseResult.fail(FarmExceptionEnum.LOGIN_ERROR.getMessage());
+            throw new MyException("注册失败");
         }
         return ResponseResult.success();
     }

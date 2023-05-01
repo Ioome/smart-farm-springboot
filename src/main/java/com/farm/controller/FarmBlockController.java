@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/block")
+@RequestMapping("/api/block")
 public class FarmBlockController extends BaseController {
 
     @Resource

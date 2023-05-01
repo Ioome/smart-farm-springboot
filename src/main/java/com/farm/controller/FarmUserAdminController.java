@@ -32,7 +32,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @Api(tags = "FarmUserAdminController", value = "后台用户管理")
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class FarmUserAdminController {
 
     @Resource
@@ -49,7 +49,7 @@ public class FarmUserAdminController {
     @ApiOperation(value = "用户注册")
     @PostMapping(value = "/register")
     @Transactional(rollbackFor = Exception.class)
-    public Object register (@Validated(RegisterGroup.class) @RequestBody FarmAdmin umsAdminParam, BindingResult result) {
+    public Object register ( @RequestBody FarmAdmin umsAdminParam) {
         FarmAdmin umsAdmin = farmAdminService.register(umsAdminParam);
         if (umsAdmin == null) {
             throw new MyException("注册失败");

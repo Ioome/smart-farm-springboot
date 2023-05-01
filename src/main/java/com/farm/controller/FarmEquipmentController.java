@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/equipment")
+@RequestMapping("/api/equipment")
 public class FarmEquipmentController {
 
     @Resource

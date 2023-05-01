@@ -3,6 +3,7 @@ package com.farm.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.po.FarmAdmin;
+import com.farm.exception.MyException;
 import com.farm.mapper.FarmAdminMapper;
 import com.farm.service.FarmAdminService;
 import com.farm.service.admin.AdminUserDetails;
@@ -69,7 +70,7 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         farmAdmin.setStatus(1);
         List<FarmAdmin> umsAdminList = adminMapper.selectList(new QueryWrapper<FarmAdmin>().lambda().eq(FarmAdmin::getUsername, umsAdminParam.getUsername()));
         if (!umsAdminList.isEmpty()) {
-            throw new RuntimeException("该用户名已存在");
+            throw new MyException("该用户名已存在");
         }
         String encodePassword = passwordEncoder.encode(farmAdmin.getPassword());
         farmAdmin.setPassword(encodePassword);

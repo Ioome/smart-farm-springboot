@@ -54,7 +54,7 @@ public class FarmUserAdminController {
         if (umsAdmin == null) {
             throw new MyException("注册失败");
         }
-        return ResponseResult.success();
+        return ResponseResult.success("注册成功,某古同志看到了，那么他就是一大傻逼，世界上最大的傻逼");
     }
 
 

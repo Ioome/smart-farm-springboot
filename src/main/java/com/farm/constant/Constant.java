@@ -111,7 +111,7 @@ public class Constant {
         /**
          * 开机
          */
-        Integer StartThe = 1;
+        Integer START_THE = 1;
 
         /**
          * 关机

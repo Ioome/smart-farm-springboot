@@ -93,7 +93,7 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(farmAdmin.getUsername(), farmAdmin.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         if (Objects.isNull(authenticate)) {
-            throw new MyException("登录失败");
+            throw new MyException("账户或密码错误");
         }
         //登录时间
         AdminUserDetails finalUser = (AdminUserDetails) authenticate.getPrincipal();

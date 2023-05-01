@@ -49,7 +49,7 @@ public class FarmUserAdminController {
     @ApiOperation(value = "用户注册")
     @PostMapping(value = "/register")
     @Transactional(rollbackFor = Exception.class)
-    public Object register ( @RequestBody FarmAdmin umsAdminParam) {
+    public Object register (@RequestBody FarmAdmin umsAdminParam) {
         FarmAdmin umsAdmin = farmAdminService.register(umsAdminParam);
         if (umsAdmin == null) {
             throw new MyException("注册失败");
@@ -71,7 +71,7 @@ public class FarmUserAdminController {
     public Object login (@RequestBody FarmAdmin farmAdmin, BindingResult result) {
         String token = farmAdminService.login(farmAdmin);
         if (token == null) {
-            return ResponseResult.fail("用户名或密码错误");
+            throw new MyException("用户名或密码错误");
         }
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);

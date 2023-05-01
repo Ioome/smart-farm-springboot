@@ -59,7 +59,7 @@ public class FarmBlock implements Serializable {
     /**
      * 面积
      */
-    private Integer area;
+    private Integer allArea;
 
     /**
      * 适合作物

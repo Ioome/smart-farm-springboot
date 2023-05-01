@@ -107,4 +107,17 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
     public List<FarmPlanting> getPlan (Integer id) {
         return farmPlantingMapper.selectList(new QueryWrapper<FarmPlanting>().lambda().eq(FarmPlanting::getBlockId, id));
     }
+
+    /**
+     * 回收区块
+     *
+     * @param id 回收区块id
+     */
+    @Override
+    public void getRecycle (Integer id) {
+        FarmBlock farmBlock = new FarmBlock();
+        farmBlock.setId(Long.valueOf(id));
+        farmBlock.setStatus(2L);
+        farmBlockMapper.updateById(farmBlock);
+    }
 }

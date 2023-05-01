@@ -102,6 +102,14 @@ public class FarmBlockController extends BaseController {
         return ResponseResult.success(farmPlantings);
     }
 
+    @ApiOperation("移入回收站")
+    @PostMapping(value = "/recycle")
+    public Object getRecycle (@RequestBody FarmBlockDto param) {
+        farmBlockService.getRecycle(param.getId());
+        return ResponseResult.success();
+    }
+
+
     @ApiOperation(value = "返回当前区块的硬件")
     @GetMapping(value = "/getHardware")
     public Object getHardware (@RequestBody FarmBlockDto param) {

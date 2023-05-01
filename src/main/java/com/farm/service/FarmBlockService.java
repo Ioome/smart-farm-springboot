@@ -60,4 +60,11 @@ public interface FarmBlockService extends IService<FarmBlock> {
      * @return 返回区块计划
      */
     List<FarmPlanting> getPlan (Integer id);
+
+    /**
+     * 回收区块
+     *
+     * @param id 回收区块id
+     */
+    void getRecycle (Integer id);
 }

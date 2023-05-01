@@ -38,7 +38,7 @@ CREATE TABLE `farm_environment`
 (
     `id`               bigint       NOT NULL AUTO_INCREMENT COMMENT '主键',
     `air_temperature`  varchar(200) NOT NULL COMMENT '环境温度',
-    `air_humidity `    varchar(200) NOT NULL COMMENT '空气湿度',
+    `air_humidity`    varchar(200) NOT NULL COMMENT '空气湿度',
     `bright_sunshine`  varchar(200)          DEFAULT NULL COMMENT '湿度状态',
     `soil_temperature` varchar(200)          DEFAULT NULL COMMENT '土壤温度',
     `soil_humidity `   varchar(200)          DEFAULT NULL COMMENT '土壤湿度',

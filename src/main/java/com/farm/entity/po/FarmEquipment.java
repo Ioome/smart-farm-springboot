@@ -56,7 +56,7 @@ public class FarmEquipment implements Serializable {
      * 设备 1 启动 2 关机
      */
     @ApiModelProperty("设备 1 启动 2 关机")
-    private Long status;
+    private Integer status;
 
     /**
      * 发送时间

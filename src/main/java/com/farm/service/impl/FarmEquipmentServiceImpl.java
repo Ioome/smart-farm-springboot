@@ -3,6 +3,7 @@ package com.farm.service.impl;
 import cn.hutool.core.util.ObjUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.farm.constant.Constant;
 import com.farm.entity.po.FarmEquipment;
 import com.farm.mapper.FarmEquipmentMapper;
 import com.farm.service.FarmEquipmentService;
@@ -94,5 +95,16 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             farmEquipmentMapper.insert(data);
         }
     }
+
+    /**
+     * 获取通过netty注册到服务器的设备
+     *
+     * @return 返回已经启动设备
+     */
+    @Override
+    public List<FarmEquipment> getEqupmentLists () {
+        return farmEquipmentMapper.selectList(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentStatus, Constant.FarmEquipmentTypeConstant.StartThe));
+    }
+
 
 }

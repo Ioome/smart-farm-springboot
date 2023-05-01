@@ -110,10 +110,4 @@ public class FarmBlockController extends BaseController {
     }
 
 
-    @ApiOperation(value = "返回当前区块的硬件")
-    @GetMapping(value = "/getHardware")
-    public Object getHardware (@RequestBody FarmBlockDto param) {
-        return ResponseResult.success();
-    }
-
 }

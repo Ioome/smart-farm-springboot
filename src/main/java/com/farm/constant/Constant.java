@@ -103,10 +103,20 @@ public class Constant {
 
     /**
      * 设备类型
+     *
      * @author sutton
      */
-    public interface farm_equipment {
+    public interface FarmEquipmentTypeConstant {
 
+        /**
+         * 开机
+         */
+        Integer StartThe = 1;
+
+        /**
+         * 关机
+         */
+        Integer ENDTHE = 2;
 
     }
 

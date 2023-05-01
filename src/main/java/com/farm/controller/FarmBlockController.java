@@ -2,6 +2,7 @@ package com.farm.controller;
 
 import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
+import com.farm.entity.po.FarmPlanting;
 import com.farm.exception.FarmExceptionEnum;
 import com.farm.restful.BaseController;
 import com.farm.service.FarmBlockService;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/block")
+@RequestMapping("/block")
 public class FarmBlockController extends BaseController {
 
     @Resource
@@ -94,5 +95,17 @@ public class FarmBlockController extends BaseController {
         return ResponseResult.success(null);
     }
 
+    @ApiOperation(value = "查看区块的计划")
+    @PostMapping(value = "/getPlan")
+    public Object getPlan (@RequestBody FarmBlockDto param) {
+        List<FarmPlanting> farmPlantings = farmBlockService.getPlan(param.getId());
+        return ResponseResult.success(farmPlantings);
+    }
+
+    @ApiOperation(value = "返回当前区块的硬件")
+    @GetMapping(value = "/getHardware")
+    public Object getHardware (@RequestBody FarmBlockDto param) {
+        return ResponseResult.success();
+    }
 
 }

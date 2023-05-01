@@ -3,6 +3,7 @@ package com.farm.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
+import com.farm.entity.po.FarmPlanting;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,4 +52,12 @@ public interface FarmBlockService extends IService<FarmBlock> {
      * @return 区块列表List
      */
     List<FarmBlock> getBlockList (FarmBlockDto dto);
+
+    /**
+     * 查看当前区块的种植计划
+     *
+     * @param id 区块
+     * @return 返回区块计划
+     */
+    List<FarmPlanting> getPlan (Integer id);
 }

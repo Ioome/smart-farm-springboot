@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
+import com.farm.entity.po.FarmPlanting;
 import com.farm.mapper.FarmBlockMapper;
+import com.farm.mapper.FarmPlantingMapper;
 import com.farm.service.FarmBlockService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
 
     @Resource
     private FarmBlockMapper farmBlockMapper;
+
+    @Resource
+    private FarmPlantingMapper farmPlantingMapper;
 
 
     /**
@@ -61,6 +66,15 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
         if (isNull(farmBlock)) {
             throw new Exception("数据不存在");
         }
+        List<FarmPlanting> farmPlantings = farmPlantingMapper.selectList(new QueryWrapper<FarmPlanting>().lambda().eq(FarmPlanting::getBlockId, id));
+        if (isNull(farmPlantings) || farmPlantings.size() == 0) {
+            return farmBlockMapper.deleteById(id);
+        }
+        for (FarmPlanting farmPlanting : farmPlantings) {
+            if (farmPlanting.getStatus().equals(3)) {
+                return farmPlantingMapper.deleteById(id);
+            }
+        }
         return farmBlockMapper.deleteById(id);
     }
 
@@ -81,5 +95,16 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
                 .ge(StringUtils.isNoneBlank(dto.getEndTime()), FarmBlock::getCreatedTime, dto.getEndTime())
                 .orderByDesc(FarmBlock::getCreatedTime));
         return page.getRecords();
+    }
+
+    /**
+     * 查看当前区块的种植计划
+     *
+     * @param id 区块
+     * @return 返回区块计划
+     */
+    @Override
+    public List<FarmPlanting> getPlan (Integer id) {
+        return farmPlantingMapper.selectList(new QueryWrapper<FarmPlanting>().lambda().eq(FarmPlanting::getBlockId, id));
     }
 }

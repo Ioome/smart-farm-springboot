@@ -5,7 +5,7 @@ server:
   port: 9241
   # 请求地址
   servlet:
-    context-path: /farm/api
+    context-path: /farm
 netty:
   host: 0.0.0.0
   port: 7397

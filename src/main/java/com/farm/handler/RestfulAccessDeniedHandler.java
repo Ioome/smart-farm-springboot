@@ -30,7 +30,6 @@ public class RestfulAccessDeniedHandler implements AccessDeniedHandler {
      */
     @Override
     public void handle (HttpServletRequest httpServletRequest, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
-
         String json = JSON.toJSONString(ResponseResult.fail(HttpStatus.UNAUTHORIZED.value(), "认证失败请重新登录"));
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.constant.Constant;
 import com.farm.entity.po.FarmEquipment;
+import com.farm.exception.MyException;
 import com.farm.mapper.FarmEquipmentMapper;
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.EquipmentUtils;
@@ -56,7 +57,7 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         List<String> parse = EquipmentUtils.splitString(msgStr, "-");
         if (isEmpty(parse)) {
             logger.info("解析失败");
-            return;
+            throw new MyException("解析失败");
         }
         //将数据除以10 parse 4 除以10
         BigDecimal finalData = new BigDecimal(parse.get(4)).divide(new BigDecimal(10));
@@ -86,10 +87,9 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             data.setData(String.valueOf(finalData));
             data.setClientIp(((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().getHostAddress());
             data.setChannelId(equipmentNumber);
-            data.setEquipmentNumber(parse.get(0));
-            data.setEquipmentType(parse.get(1));
-            data.setEquipmentName(parse.get(2));
-
+            data.setEquipmentName(parse.get(0));
+            data.setEquipmentNumber(parse.get(1));
+            data.setEquipmentType(parse.get(2));
             data.setEquipmentStatus(parse.get(3));
             data.setClientPort(String.valueOf(((InetSocketAddress) ctx.channel().remoteAddress()).getPort()));
             farmEquipmentMapper.insert(data);

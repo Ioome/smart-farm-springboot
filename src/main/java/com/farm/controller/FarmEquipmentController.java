@@ -1,13 +1,20 @@
 package com.farm.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.farm.entity.dto.FarmEquipmentDto;
 import com.farm.entity.po.FarmEquipment;
+import com.farm.mapper.FarmEquipmentMapper;
+import com.farm.restful.BaseController;
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,7 +27,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/api/equipment")
-public class FarmEquipmentController {
+public class FarmEquipmentController extends BaseController {
 
     @Resource
     private FarmEquipmentService farmEquipmentService;
@@ -38,7 +45,57 @@ public class FarmEquipmentController {
         List<FarmEquipment> farmPlantings = farmEquipmentService.getEqupmentLists();
         return ResponseResult.success(farmPlantings);
     }
-    
+
+
+    @Autowired
+    private FarmEquipmentMapper farmEquipmentMapper;
+
+    /**
+     * 删除
+     */
+    @PostMapping("/delete")
+    public Object delete (int id) {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().eq("farmEquipment_id", id));
+        if (farmEquipment != null) {
+            farmEquipmentMapper.deleteById(id);
+            return ResponseResult.success("删除成功");
+        } else {
+            return ResponseResult.fail("没有找到该对象");
+        }
+    }
+
+    /**
+     * 查询
+     */
+    @PostMapping("/find")
+    public Object find (int id) {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().eq("farmEquipment_id", id));
+        if (farmEquipment != null) {
+            return ResponseResult.success(farmEquipment);
+        } else {
+            return ResponseResult.fail("没有找到该对象");
+        }
+    }
+
+    /**
+     * 自动分页查询
+     */
+    @PostMapping("/list")
+    public Object list (@RequestBody FarmEquipmentDto dto) {
+        log.info("page:" + dto.getPageObj().getPages() + "-limit:" + dto.getPageObj().getSize() + "-json:" + JSON.toJSONString(dto));
+        //条件构造器
+        QueryWrapper<FarmEquipment> queryWrapper = new QueryWrapper<FarmEquipment>();
+        if (StringUtils.isNotEmpty(dto.getEquipmentName())) {
+            FarmEquipment farmEquipment = JSON.parseObject(dto.getEquipmentName(), FarmEquipment.class);
+            queryWrapper.eq(StringUtils.isNoneEmpty(farmEquipment.getEquipmentName()), "farmEquipment_name", farmEquipment.getEquipmentName());
+        }
+        //执行分页
+        IPage<FarmEquipment> pageList = farmEquipmentMapper.selectPage(dto.getPageObj(), queryWrapper);
+        //返回结果
+        return toResult(pageList);
+    }
+
+
 
 }
 

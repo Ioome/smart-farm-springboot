@@ -1,10 +1,12 @@
-package com.farm.entity.po;
+package com.farm.entity.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.farm.restful.PageEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @ApiModel("farm_equipment")
-public class FarmEquipment implements Serializable {
+public class FarmEquipmentDto extends PageEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

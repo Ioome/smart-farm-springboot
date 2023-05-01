@@ -22,27 +22,29 @@ public interface FarmPlantingService extends IService<FarmPlanting> {
      * @param farmPlanting 实体对象
      * @return 返回插入成功的ID
      */
-     Object insert (FarmPlanting farmPlanting);
+    Object insert (FarmPlanting farmPlanting);
 
     /**
      * 删除
      */
-     Object delete (int id);
+    Object delete (int id);
 
     /**
      * 更新
      */
-     Object update (FarmPlanting farmPlanting);
+    Object update (FarmPlanting farmPlanting);
 
     /**
      * 根据主键 id 查询
      */
-     FarmPlanting load (Integer id);
+    FarmPlanting load (Integer id);
+
 
     /**
      * 分页查询
+     *
+     * @param dto dto
+     * @return 返回分页数据
      */
-     Map<String, Object> pageList (int offset, int pagesize);
-
     Map<String, Object> pageList (FarmPlantingDto dto);
 }

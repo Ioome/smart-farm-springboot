@@ -3,7 +3,6 @@ package com.farm.controller;
 import com.farm.entity.dto.FarmPlantingDto;
 import com.farm.entity.po.FarmPlanting;
 import com.farm.service.FarmPlantingService;
-import com.farm.utils.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

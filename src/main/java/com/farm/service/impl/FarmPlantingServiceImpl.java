@@ -50,8 +50,9 @@ public class FarmPlantingServiceImpl extends ServiceImpl<FarmPlantingMapper, Far
     }
 
 
+
     @Override
-    public FarmPlanting load (int id) {
+    public FarmPlanting load (Integer id) {
         return farmPlantingMapper.selectById(id);
     }
 

@@ -1,15 +1,14 @@
-package com.farm.entity.po;
+package com.farm.entity.dto;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.farm.restful.PageEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-import java.util.List;
 import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import java.util.Date;
 
 /**
  * @author www.itgongju.com
@@ -18,7 +17,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
  */
 @Data
 @ApiModel("种植计划表")
-public class FarmPlanting implements Serializable {
+public class FarmPlantingDto extends PageEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -186,6 +185,6 @@ public class FarmPlanting implements Serializable {
     @ApiModelProperty("区块id")
     private Integer blockId;
 
-    public FarmPlanting () {
+    public FarmPlantingDto () {
     }
 }

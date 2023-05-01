@@ -75,7 +75,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
         Page<FarmBlock> page = farmBlockMapper.selectPage(dto.getPageObj(), new QueryWrapper<FarmBlock>()
                 .lambda()
                 .like(StringUtils.isNoneBlank(dto.getCode()), FarmBlock::getCode, dto.getCode())
-                .eq(StringUtils.isNoneBlank(dto.getArea()), FarmBlock::getArea, dto.getArea())
+                .eq(StringUtils.isNoneBlank(dto.getArea()), FarmBlock::getAllArea, dto.getArea())
                 .eq(StringUtils.isNoneBlank(dto.getStatus()), FarmBlock::getStatus, dto.getStatus())
                 .le(StringUtils.isNoneBlank(dto.getStartTime()), FarmBlock::getCreatedTime, dto.getStartTime())
                 .ge(StringUtils.isNoneBlank(dto.getEndTime()), FarmBlock::getCreatedTime, dto.getEndTime())

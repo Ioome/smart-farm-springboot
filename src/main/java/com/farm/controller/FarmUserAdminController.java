@@ -32,7 +32,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @Api(tags = "FarmUserAdminController", value = "后台用户管理")
-@RequestMapping("/api/admin")
+@RequestMapping("/admin")
 public class FarmUserAdminController {
 
     @Resource

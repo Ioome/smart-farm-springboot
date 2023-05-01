@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author sutton
- * @description 种植计划表controller层
+ * @description 植物controller层
  * @date 2023-05-01
  */
 @Slf4j
 @RestController
-@RequestMapping("/planting")
-public class FarmPlantingController {
+@RequestMapping("/plant")
+public class FarmPlantController {
+
 
 }
 

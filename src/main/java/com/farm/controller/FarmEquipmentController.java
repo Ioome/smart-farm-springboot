@@ -3,6 +3,7 @@ package com.farm.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.farm.entity.dto.FarmEquipmentDto;
 import com.farm.entity.po.FarmEquipment;
 import com.farm.mapper.FarmEquipmentMapper;
@@ -84,9 +85,9 @@ public class FarmEquipmentController extends BaseController {
     public Object list (@RequestBody FarmEquipmentDto dto) {
         log.info("page:" + dto.getPageObj().getPages() + "-limit:" + dto.getPageObj().getSize() + "-json:" + JSON.toJSONString(dto));
         //执行分页
-        IPage<FarmEquipment> pageList = farmEquipmentMapper.selectPage(dto.getPageObj(), new QueryWrapper<FarmEquipment>().lambda().like(StringUtils.isNotBlank(dto.getEquipmentName()), FarmEquipment::getEquipmentName, dto.getEquipmentName()));
+        Page<FarmEquipment> pageList = farmEquipmentMapper.selectPage(dto.getPageObj(), new QueryWrapper<FarmEquipment>().lambda().like(StringUtils.isNotBlank(dto.getEquipmentName()), FarmEquipment::getEquipmentName, dto.getEquipmentName()));
         //返回结果
-        return toResult(pageList);
+        return toResult(pageList.getRecords());
     }
 
 

@@ -20,12 +20,6 @@
 
 
     <dependencies>
-        <!--   feign-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-            <version>1.2.2.RELEASE</version>
-        </dependency>
         <!--Swagger-UI API文档生产工具-->
         <dependency>
             <groupId>io.springfox</groupId>

@@ -42,4 +42,57 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
      */
     String getTemperature ();
 
+
+    /**
+     * 获取日照
+     *
+     * @return
+     */
+    String getSunShine ();
+
+    /**
+     * 获取降雨量
+     *
+     * @return 返回降雨量数据
+     */
+    String getRainfall ();
+
+    /**
+     * 获取空气温度
+     *
+     * @return 获取空气温度
+     */
+    String getAirTemp ();
+
+
+    /**
+     * 获取空气湿度
+     *
+     * @return 获取空气湿度
+     */
+    String getAirHund ();
+
+    /**
+     * 获取土壤湿度
+     *
+     * @return 获取土壤湿度
+     */
+
+    String getLandHund ();
+
+
+    /**
+     * 获取土壤温度
+     *
+     * @return
+     */
+    String getLandTemp ();
+
+
+    /**
+     * 获取区块信息
+     *
+     * @return
+     */
+    Object getBlock ();
 }

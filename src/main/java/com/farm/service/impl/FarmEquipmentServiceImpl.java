@@ -3,8 +3,10 @@ package com.farm.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.constant.Constant;
+import com.farm.entity.po.FarmBlock;
 import com.farm.entity.po.FarmEquipment;
 import com.farm.exception.MyException;
+import com.farm.mapper.FarmBlockMapper;
 import com.farm.mapper.FarmEquipmentMapper;
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.EquipmentUtils;
@@ -37,6 +39,9 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
 
     @Resource
     private FarmEquipmentMapper farmEquipmentMapper;
+
+    @Resource
+    private FarmBlockMapper blockMapper;
 
     /**
      * 从设备获取响应的信息
@@ -119,6 +124,97 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             throw new MyException("设备不存在");
         }
         return farmEquipment.getData();
+    }
+
+    /**
+     * 获取日照
+     *
+     * @return 获取日照
+     */
+    @Override
+    public String getSunShine () {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.SUNSHINE));
+        if (isNull(farmEquipment)) {
+            throw new MyException("设备不存在");
+        }
+        return farmEquipment.getData();
+    }
+
+    /**
+     * 获取降雨量
+     *
+     * @return 返回降雨量数据
+     */
+    @Override
+    public String getRainfall () {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.RAILFALL));
+        if (isNull(farmEquipment)) {
+            throw new MyException("设备不存在");
+        }
+        return farmEquipment.getData();
+    }
+
+    /**
+     * 获取空气温度
+     *
+     * @return 获取空气温度
+     */
+    @Override
+    public String getAirTemp () {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.AIR_TEMP));
+        if (isNull(farmEquipment)) {
+            throw new MyException("设备不存在");
+        }
+        return farmEquipment.getData();
+    }
+
+
+    /**
+     * 获取空气湿度
+     *
+     * @return 返回湿度
+     */
+    @Override
+    public String getAirHund () {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.AIR_HUN));
+        if (isNull(farmEquipment)) {
+            throw new MyException("设备不存在");
+        }
+        return farmEquipment.getData();
+    }
+
+    /**
+     * 获取土壤湿度
+     *
+     * @return 获取土壤湿度
+     */
+    @Override
+    public String getLandHund () {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.LAND_TEMP));
+        if (isNull(farmEquipment)) {
+            throw new MyException("设备不存在");
+        }
+        return farmEquipment.getData();
+    }
+
+    /**
+     * 获取土壤温度
+     *
+     * @return 返回温度
+     */
+    @Override
+    public String getLandTemp () {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.LAND_HUN));
+        if (isNull(farmEquipment)) {
+            throw new MyException("设备不存在");
+        }
+        return farmEquipment.getData();
+    }
+
+    @Override
+    public Object getBlock () {
+
+        return null;
     }
 
 

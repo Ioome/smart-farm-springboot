@@ -2,8 +2,11 @@ package com.farm.controller;
 
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.ResponseResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +33,7 @@ public class BigDataController {
      * @return block
      */
     @ApiOperation(value = "获取气温")
-    @RequestMapping("/getTemperature")
+    @PostMapping("/getTemperature")
     public Object getTemperature () {
         return ResponseResult.success(farmEquipmentService.getTemperature());
     }
@@ -42,9 +45,9 @@ public class BigDataController {
      * @return 日照
      */
     @ApiOperation(value = "获取日照")
-    @RequestMapping("/getSunShine")
+    @PostMapping("/getSunShine")
     public Object getSunShine () {
-        return ResponseResult.success();
+        return ResponseResult.success(farmEquipmentService.getSunShine());
     }
 
 
@@ -54,9 +57,9 @@ public class BigDataController {
      * @return 返回降雨量
      */
     @ApiOperation(value = "获取降雨量")
-    @RequestMapping("/getRailfall")
+    @PostMapping("/getRailfall")
     public Object getRainfall () {
-        return ResponseResult.success();
+        return ResponseResult.success(farmEquipmentService.getRainfall());
     }
 
 
@@ -66,9 +69,9 @@ public class BigDataController {
      * @return 获取空气温度
      */
     @ApiOperation(value = "获取空气温度")
-    @RequestMapping("/getAirTemperature")
+    @PostMapping("/getAirTemperature")
     public Object getAirTemperature () {
-        return ResponseResult.success();
+        return ResponseResult.success(farmEquipmentService.getAirTemp());
     }
 
     /**
@@ -77,22 +80,28 @@ public class BigDataController {
      * @return 获取空气湿度
      */
     @ApiOperation(value = "获取空气湿度")
-    @RequestMapping("/getAirHumidity")
+    @PostMapping("/getAirHumidity")
     public Object getAirHumidity () {
-        return ResponseResult.success();
+        return ResponseResult.success(farmEquipmentService.getAirHund());
     }
 
 
     @ApiOperation(value = "获取土壤湿度")
-    @RequestMapping("/getLandHumidity")
+    @PostMapping("/getLandHumidity")
     public Object getLandHumidity () {
-        return ResponseResult.success();
+        return ResponseResult.success(farmEquipmentService.getLandHund());
     }
 
     @ApiOperation(value = "获取土壤湿度")
-    @RequestMapping("/getLandTemperature")
+    @PostMapping("/getLandTemperature")
     public Object getLandTemperature () {
-        return ResponseResult.success();
+        return ResponseResult.success(farmEquipmentService.getLandTemp());
     }
 
+
+    @ApiOperation("获取区块")
+    @GetMapping("getBlock")
+    public Object getBlock () {
+        return ResponseResult.success(farmEquipmentService.getBlock());
+    }
 }

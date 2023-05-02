@@ -34,30 +34,6 @@ CREATE TABLE `farm_planting`
   DEFAULT CHARSET = utf8 COMMENT ='种植计划表';
 
 
-CREATE TABLE `farm_environment`
-(
-    `id`               bigint       NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `air_temperature`  varchar(200) NOT NULL COMMENT '环境温度',
-    `air_humidity`    varchar(200) NOT NULL COMMENT '空气湿度',
-    `bright_sunshine`  varchar(200)          DEFAULT NULL COMMENT '湿度状态',
-    `soil_temperature` varchar(200)          DEFAULT NULL COMMENT '土壤温度',
-    `soil_humidity `   varchar(200)          DEFAULT NULL COMMENT '土壤湿度',
-    `other`            varchar(200)          DEFAULT NULL COMMENT '其它',
-    `user_name`        varchar(200)          DEFAULT NULL COMMENT '用户名',
-    `phone_number`     varchar(200)          DEFAULT NULL COMMENT '手机',
-    `user_id`          bigint       NOT NULL COMMENT '用户id',
-    `created_time`     datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`      datetime              DEFAULT NULL COMMENT '更新时间',
-    `update_by`        INT                   DEFAULT NULL COMMENT '更新人',
-    `create_by`        INT                   DEFAULT NULL COMMENT '创建人',
-    `delete_time`      datetime              DEFAULT NULL COMMENT '删除（null.正常)',
-    `parent_id`        BIGINT                DEFAULT NULL COMMENT '主环境id',
-    `block_id`         BIGINT                DEFAULT NULL COMMENT '区块',
-    `equipment`        BIGINT                DEFAULT NULL COMMENT '设备',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 1608432827022
-  DEFAULT CHARSET = utf8 COMMENT ='环境';
 
 CREATE TABLE `farm_equipment`
 (
@@ -134,28 +110,6 @@ CREATE TABLE `farm_plant`
   DEFAULT CHARSET = utf8 COMMENT ='植物';
 
 
-
-CREATE TABLE `farm_change_water`
-(
-    `id`                 bigint   NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `bianhao`            varchar(200)      DEFAULT NULL COMMENT '编号',
-    `land_name`          varchar(200)      DEFAULT NULL COMMENT '土地名称',
-    `change_create_time` date              DEFAULT NULL COMMENT '换水日期',
-    `statue`             varchar(200)      DEFAULT NULL COMMENT '当前状态  0 未换水 1 已换水',
-    `next_change`        date              DEFAULT NULL COMMENT '下次换水',
-    `other`              varchar(200)      DEFAULT NULL COMMENT '其它',
-    `user_name`          varchar(200)      DEFAULT NULL COMMENT '用户名',
-    `phone_number`       varchar(200)      DEFAULT NULL COMMENT '手机号码',
-    `created_time`       datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`        datetime          DEFAULT NULL COMMENT '更新时间',
-    `update_by`          INT               DEFAULT NULL COMMENT '更新人',
-    `create_by`          INT               DEFAULT NULL COMMENT '创建人',
-    `delete_time`        datetime          DEFAULT NULL COMMENT '删除（null.正常)',
-    `userid`             bigint   NOT NULL COMMENT '用户id',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 1608432839693
-  DEFAULT CHARSET = utf8 COMMENT ='换水';
 
 CREATE TABLE `farm_plant_inventory_receipts`
 (

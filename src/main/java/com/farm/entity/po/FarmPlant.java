@@ -21,9 +21,6 @@ public class FarmPlant implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(type = IdType.AUTO)
-    /**
-     * 主键
-     */
     @ApiModelProperty("主键")
     private Long id;
 

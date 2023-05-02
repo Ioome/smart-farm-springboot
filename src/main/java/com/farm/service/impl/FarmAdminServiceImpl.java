@@ -2,6 +2,7 @@ package com.farm.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.farm.entity.dto.FarmAdminInfoDto;
 import com.farm.entity.po.FarmAdmin;
 import com.farm.entity.vo.FarmAdminVo;
 import com.farm.exception.MyException;
@@ -143,6 +144,25 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         FarmAdminVo farmAdminVo = new FarmAdminVo();
         BeanUtils.copyProperties(farmAdmin1, farmAdminVo);
         LOGGER.info("用户 {}", farmAdminVo);
+        return farmAdminVo;
+    }
+
+    @Override
+    public FarmAdminVo updateInfo (FarmAdminInfoDto dto) {
+        Long userId = UserInfoUtils.getUserId();
+        FarmAdmin farmAdmin = adminMapper.selectOne(new QueryWrapper<FarmAdmin>().lambda().eq(FarmAdmin::getId, userId));
+        if (isNull(farmAdmin)) {
+            throw new MyException("用户不存在或者未登录");
+        }
+        farmAdmin.setNickName(dto.getNickName());
+        farmAdmin.setPhone(dto.getPhone());
+        farmAdmin.setEmail(dto.getEmail());
+        farmAdmin.setSex(dto.getSex());
+        farmAdmin.setEmail(dto.getEmail());
+        farmAdmin.setNote(dto.getNote());
+        FarmAdminVo farmAdminVo = new FarmAdminVo();
+        BeanUtils.copyProperties(farmAdmin, farmAdminVo);
+        LOGGER.info("用户 {}", farmAdmin);
         return farmAdminVo;
     }
 }

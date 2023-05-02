@@ -1,6 +1,7 @@
 package com.farm.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.farm.entity.dto.FarmAdminInfoDto;
 import com.farm.entity.po.FarmAdmin;
 import com.farm.entity.vo.FarmAdminVo;
 import org.springframework.stereotype.Service;
@@ -52,4 +53,6 @@ public interface FarmAdminService extends IService<FarmAdmin> {
      * @return 返回用户信息
      */
     FarmAdminVo getUserInfo ();
+
+    FarmAdminVo updateInfo (FarmAdminInfoDto dto);
 }

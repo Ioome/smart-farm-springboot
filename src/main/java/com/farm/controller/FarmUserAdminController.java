@@ -1,5 +1,6 @@
 package com.farm.controller;
 
+import com.farm.entity.dto.FarmAdminInfoDto;
 import com.farm.entity.po.FarmAdmin;
 import com.farm.entity.vo.FarmAdminVo;
 import com.farm.exception.FarmExceptionEnum;
@@ -101,4 +102,16 @@ public class FarmUserAdminController {
         }
         return ResponseResult.success(info);
     }
+
+
+    @ApiOperation(value = "更新用户信息")
+    @PostMapping(value = "/updateInfo")
+    public Object updateInfo (@RequestBody FarmAdminInfoDto dto) {
+        FarmAdminVo info = farmAdminService.updateInfo(dto);
+        if (info == null) {
+            throw new MyException("更新用户失败");
+        }
+        return ResponseResult.success(info);
+    }
+
 }

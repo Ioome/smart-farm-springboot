@@ -132,4 +132,7 @@ public class FarmAdmin implements Serializable {
     @ApiModelProperty("删除（null.正常)")
     private Date deleteTime;
 
+    @ApiModelProperty("邮箱修改次数")
+    private Long emailCount;
+
 }

@@ -95,7 +95,7 @@ public class FarmUserAdminController {
     @ApiOperation(value = "获取用户信息")
     @PostMapping(value = "/userInfo")
     public Object getUserInfo () {
-        FarmAdminVo info = farmAdminService.getUserInfo(farmAdmin);
+        FarmAdminVo info = farmAdminService.getUserInfo();
         if (info == null) {
             throw new MyException("获取用户信息失败");
         }

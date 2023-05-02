@@ -7,10 +7,12 @@ import com.farm.entity.po.FarmPlanting;
 import com.farm.mapper.FarmPlantingMapper;
 import com.farm.service.FarmPlantingService;
 import com.farm.utils.ResponseResult;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * @name: FarmPlantingServiceImpl
@@ -18,6 +20,7 @@ import java.util.Map;
  * @date: 2023-05-01 15:14
  * @description: FarmPlantingServiceImpl
  */
+@Service
 public class FarmPlantingServiceImpl extends ServiceImpl<FarmPlantingMapper, FarmPlanting> implements FarmPlantingService {
     @Resource
     private FarmPlantingMapper farmPlantingMapper;

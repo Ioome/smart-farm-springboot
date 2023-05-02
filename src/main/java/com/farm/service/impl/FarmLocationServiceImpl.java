@@ -2,13 +2,17 @@ package com.farm.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.dto.FarmLocationDto;
+import com.farm.entity.po.CityInfo;
 import com.farm.entity.po.FarmLocation;
 import com.farm.entity.vo.FarmLocationVo;
-import com.farm.feign.GeoApiService;
 import com.farm.mapper.FarmLocationMapper;
 import com.farm.service.FarmLocationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @name: FarmLocationServiceImpl
@@ -17,14 +21,16 @@ import org.springframework.stereotype.Service;
  * @description: FarmLocationServiceImpl
  */
 @Service
+@Slf4j
 public class FarmLocationServiceImpl extends ServiceImpl<FarmLocationMapper, FarmLocation> implements FarmLocationService {
 
 
     @Autowired
     private FarmLocationMapper farmLocationMapper;
 
-    @Autowired
-    private GeoApiService geoApiService;
+
+    @Value("${qweather.geoapi.key}")
+    private String key;
 
     /**
      * 根据城市名称获取城市id
@@ -34,6 +40,8 @@ public class FarmLocationServiceImpl extends ServiceImpl<FarmLocationMapper, Far
      */
     @Override
     public FarmLocationVo getCityInfo (FarmLocationDto dto) {
+        log.info("开始调用城市接口......");
+        log.info("请求成功 {}");
         return null;
     }
 }

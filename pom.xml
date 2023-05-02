@@ -26,6 +26,11 @@
             <version>3.0.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
         <!--Swagger-UI API文档生产工具-->
         <dependency>
             <groupId>io.springfox</groupId>

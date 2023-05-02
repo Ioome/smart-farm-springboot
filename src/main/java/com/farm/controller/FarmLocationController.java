@@ -7,14 +7,11 @@ import com.farm.utils.ResponseResult;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/farmLocation")
+@RequestMapping("/api/farmLocation")
 public class FarmLocationController {
 
 
@@ -27,7 +24,7 @@ public class FarmLocationController {
      * @return 返回城市名字和id以及
      */
     @ApiOperation(value = "获取城市信息")
-    @GetMapping("/getCityInfo")
+    @PostMapping("/getCityInfo")
     public Object getCityInfo (@RequestBody FarmLocationDto dto) {
         FarmLocationVo citys = farmLocationService.getCityInfo(dto);
         return ResponseResult.success(citys);

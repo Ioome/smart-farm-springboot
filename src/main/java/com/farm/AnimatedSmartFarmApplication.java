@@ -10,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -31,6 +33,7 @@ import java.net.UnknownHostException;
 @Slf4j
 @EnableAsync
 @EnableSwagger2
+@EnableFeignClients
 @EnableScheduling
 @MapperScan(basePackages = "com.farm.mapper")
 public class AnimatedSmartFarmApplication extends SpringBootServletInitializer implements CommandLineRunner {

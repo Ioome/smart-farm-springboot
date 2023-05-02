@@ -1,6 +1,7 @@
 package com.farm.controller;
 
 import com.farm.entity.dto.FarmLocationDto;
+import com.farm.entity.vo.FarmLocationVo;
 import com.farm.service.FarmLocationService;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.ApiOperation;
@@ -28,8 +29,8 @@ public class FarmLocationController {
     @ApiOperation(value = "获取城市信息")
     @GetMapping("/getCityInfo")
     public Object getCityInfo (@RequestBody FarmLocationDto dto) {
-
-        return ResponseResult.success();
+        FarmLocationVo citys = farmLocationService.getCityInfo(dto);
+        return ResponseResult.success(citys);
     }
 
 

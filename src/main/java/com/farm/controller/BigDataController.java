@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @RestController
-@RequestMapping("/data")
+@RequestMapping("/api/data")
 public class BigDataController {
 
     @Resource

@@ -2,6 +2,7 @@ package com.farm.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.farm.entity.po.FarmAdmin;
+import com.farm.entity.vo.FarmAdminVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -42,4 +43,13 @@ public interface FarmAdminService extends IService<FarmAdmin> {
      * 登出功能
      */
     void logout ();
+
+
+    /**
+     * 根据用户名查询用户信息
+     *
+     * @param farmAdmin
+     * @return 返回用户信息
+     */
+    FarmAdminVo getUserInfo ();
 }

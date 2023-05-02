@@ -3,12 +3,14 @@ package com.farm.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.po.FarmAdmin;
+import com.farm.entity.vo.FarmAdminVo;
 import com.farm.exception.MyException;
 import com.farm.mapper.FarmAdminMapper;
 import com.farm.service.FarmAdminService;
 import com.farm.service.admin.AdminUserDetails;
 import com.farm.utils.JwtUtil;
 import com.farm.utils.RedisCache;
+import com.farm.utils.UserInfoUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -23,6 +25,8 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
+import static java.util.Objects.isNull;
 
 /**
  * @name: FarmAdminServiceImpl
@@ -92,7 +96,7 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         //记录秒数
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(farmAdmin.getUsername(), farmAdmin.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-        if (Objects.isNull(authenticate)) {
+        if (isNull(authenticate)) {
             throw new MyException("账户或密码错误");
         }
         //登录时间
@@ -121,5 +125,24 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         }
         Long userid = loginUser.getUser().getId();
         redisCache.deleteObject("token_:" + userid);
+    }
+
+    /**
+     * 根据用户名查询用户信息
+     *
+     * @param farmAdmin
+     * @return 返回用户信息
+     */
+    @Override
+    public FarmAdminVo getUserInfo () {
+        Long userId = UserInfoUtils.getUserId();
+        FarmAdmin farmAdmin1 = adminMapper.selectOne(new QueryWrapper<FarmAdmin>().lambda().eq(FarmAdmin::getId, userId));
+        if (isNull(farmAdmin1)) {
+            throw new MyException("用户不存在");
+        }
+        FarmAdminVo farmAdminVo = new FarmAdminVo();
+        BeanUtils.copyProperties(farmAdmin1, farmAdminVo);
+        LOGGER.info("用户 {}", farmAdminVo);
+        return farmAdminVo;
     }
 }

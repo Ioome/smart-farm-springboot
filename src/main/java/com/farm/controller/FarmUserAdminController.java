@@ -1,6 +1,7 @@
 package com.farm.controller;
 
 import com.farm.entity.po.FarmAdmin;
+import com.farm.entity.vo.FarmAdminVo;
 import com.farm.exception.FarmExceptionEnum;
 import com.farm.exception.MyException;
 import com.farm.service.FarmAdminService;
@@ -88,5 +89,16 @@ public class FarmUserAdminController {
     public Object logout () {
         farmAdminService.logout();
         return ResponseResult.success("退出成功");
+    }
+
+
+    @ApiOperation(value = "获取用户信息")
+    @PostMapping(value = "/userInfo")
+    public Object getUserInfo () {
+        FarmAdminVo info = farmAdminService.getUserInfo(farmAdmin);
+        if (info == null) {
+            throw new MyException("获取用户信息失败");
+        }
+        return ResponseResult.success(info);
     }
 }

@@ -1,6 +1,5 @@
 package com.farm.service.impl;
 
-import cn.hutool.core.util.ObjUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.constant.Constant;
@@ -18,9 +17,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static cn.hutool.core.util.ObjectUtil.isEmpty;
 import static cn.hutool.core.util.ObjectUtil.isNotNull;
@@ -108,6 +105,20 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             throw new MyException("没有设备");
         }
         return farmEquipments;
+    }
+
+    /**
+     * 返回温度
+     *
+     * @return 返回温度
+     */
+    @Override
+    public String getTemperature () {
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.TEMP));
+        if (isNull(farmEquipment)) {
+            throw new MyException("设备不存在");
+        }
+        return farmEquipment.getData();
     }
 
 

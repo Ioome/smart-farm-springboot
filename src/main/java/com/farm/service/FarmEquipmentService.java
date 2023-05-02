@@ -33,4 +33,13 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
      * @return 返回设备
      */
     List<FarmEquipment> getEqupmentLists ();
+
+
+    /**
+     * 返回温度
+     *
+     * @return
+     */
+    String getTemperature ();
+
 }

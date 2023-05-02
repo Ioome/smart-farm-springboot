@@ -2,7 +2,6 @@ package com.farm.controller;
 
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.ResponseResult;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +32,7 @@ public class BigDataController {
     @ApiOperation(value = "获取气温")
     @RequestMapping("/getTemperature")
     public Object getTemperature () {
-        return ResponseResult.success();
+        return ResponseResult.success(farmEquipmentService.getTemperature());
     }
 
 

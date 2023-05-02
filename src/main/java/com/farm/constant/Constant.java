@@ -120,4 +120,46 @@ public class Constant {
 
     }
 
+    public interface FarmTypeConstant {
+
+
+        /**
+         * 温度类型
+         */
+        Integer TEMP = 1;
+
+        /**
+         * 日照量
+         */
+
+        Integer SUNSHINE = 2;
+
+        /**
+         * 降雨量
+         */
+
+        Integer RAILFALL = 3;
+
+        /**
+         * 空气温度
+         */
+        Integer AIR_TEMP = 4;
+
+
+        /**
+         * 空气湿度
+         */
+        Integer AIR_HUN = 5;
+
+        /**
+         * 土壤温度
+         */
+        Integer LAND_TEMP = 6;
+
+        /**
+         * 土壤湿度
+         */
+        Integer LAND_HUN = 7;
+    }
+
 }

@@ -32,7 +32,6 @@ public class FarmPlantingController {
     }
 
 
-
     @RequestMapping("/delete")
     public Object delete (int id) {
         return farmPlantingService.delete(id);
@@ -40,13 +39,13 @@ public class FarmPlantingController {
 
 
     @RequestMapping("/update")
-    public Object update (FarmPlanting farmPlanting) {
+    public Object update (@RequestBody  FarmPlanting farmPlanting) {
         return farmPlantingService.update(farmPlanting);
     }
 
 
     @RequestMapping("/getPlanting")
-    public Object load (FarmPlantingDto param) {
+    public Object load (@RequestBody FarmPlantingDto param) {
         return farmPlantingService.load(param.getId());
     }
 

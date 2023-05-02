@@ -89,8 +89,6 @@ public class FarmEquipmentController extends BaseController {
         //返回结果
         return toResult(pageList.getRecords());
     }
-
-
 }
 
 

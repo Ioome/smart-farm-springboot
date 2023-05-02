@@ -51,7 +51,6 @@ public class FarmPlantingController {
 
 
     @RequestMapping("/pageList")
-
     public Map<String, Object> pageList (@RequestBody FarmPlantingDto dto) {
         return farmPlantingService.pageList(dto);
     }

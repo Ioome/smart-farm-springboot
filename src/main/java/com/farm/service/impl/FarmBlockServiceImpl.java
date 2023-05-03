@@ -54,7 +54,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
     public FarmBlock getOne (Long id) {
         FarmBlock farmBlock = farmBlockMapper.selectById(id);
         List<FarmPlanting> farmPlantings = farmPlantingMapper.selectList(new QueryWrapper<FarmPlanting>().lambda().eq(FarmPlanting::getBlockId, id));
-        
+
         return farmBlock;
     }
 
@@ -109,7 +109,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
      */
     @Override
     public List<FarmPlanting> getPlan (Integer id) {
-        return farmPlantingMapper.selectList(new QueryWrapper<FarmPlanting>().lambda().eq(FarmPlanting::getBlockId, id));
+        return farmPlantingMapper.selectList(new QueryWrapper<FarmPlanting>().lambda().eq(FarmPlanting::getBlockId, id).orderByDesc(FarmPlanting::getCreatedTime));
     }
 
     /**
@@ -136,6 +136,12 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
         farmBlockMapper.insert(farmBlock);
     }
 
+
+    /**
+     * 获取区块名称和id 和总面积
+     *
+     * @return 总面积
+     */
     @Override
     public List<FarmBlockValueAndNameVo> getValueAndName () {
         return farmBlockMapper.selectFarmBlockValueAndName();

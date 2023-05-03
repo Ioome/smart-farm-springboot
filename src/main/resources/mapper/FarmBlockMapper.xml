@@ -12,5 +12,6 @@
     <resultMap id="FarmBlockValueAndNameResultMap" type="FarmBlockValueAndNameVo">
         <result column="id" property="id"/>
         <result column="land_name" property="landName"/>
+        <result column="all_area" property="allArea"/>
     </resultMap>
 </mapper>

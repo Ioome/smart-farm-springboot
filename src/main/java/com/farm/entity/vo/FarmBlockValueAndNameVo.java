@@ -2,6 +2,8 @@ package com.farm.entity.vo;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @name: FarmBlockValueAndNameVo
  * @author: sutton
@@ -15,4 +17,6 @@ public class FarmBlockValueAndNameVo {
     private Integer id;
 
     private String landName;
+
+    private BigDecimal allArea;
 }

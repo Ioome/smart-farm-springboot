@@ -120,4 +120,15 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
         farmBlock.setStatus(2L);
         farmBlockMapper.updateById(farmBlock);
     }
+
+    /**
+     * 新增区块
+     *
+     * @param farmBlock 区块信息
+     */
+    @Override
+    public void saveBlock (FarmBlock farmBlock) {
+        farmBlock.setStatus(1L);
+        farmBlockMapper.insert(farmBlock);
+    }
 }

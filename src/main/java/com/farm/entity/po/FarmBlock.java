@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,26 +17,36 @@ public class FarmBlock implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
+
+    @NotEmpty(message = "could not be empty")
     /**
      * 编号
      */
     private String code;
 
+
+    @NotEmpty(message = "could not be empty")
     /**
      * 土地名称
      */
     private String landName;
 
+
+
+    @NotEmpty(message = "could not be empty")
     /**
      * 土地编码
      */
     private String landCode;
 
+    @NotEmpty(message = "could not be empty")
     /**
      * 土地期限
      */
     private Date landTime;
 
+
+    @NotEmpty(message = "could not be empty")
     /**
      * 土地地理位置
      */
@@ -51,11 +62,15 @@ public class FarmBlock implements Serializable {
      */
     private String image;
 
+
+    @NotEmpty(message = "could not be empty")
     /**
      * 规模
      */
     private String scale;
 
+
+    @NotEmpty(message = "could not be empty")
     /**
      * 面积
      */
@@ -66,6 +81,7 @@ public class FarmBlock implements Serializable {
      */
     private String suitableCrop;
 
+    @NotEmpty(message = "could not be empty")
     /**
      * 详情
      */

@@ -67,4 +67,11 @@ public interface FarmBlockService extends IService<FarmBlock> {
      * @param id 回收区块id
      */
     void getRecycle (Integer id);
+
+
+    /**
+     * 新增区块
+     * @param farmBlock
+     */
+    void saveBlock (FarmBlock farmBlock);
 }

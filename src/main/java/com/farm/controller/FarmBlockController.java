@@ -91,7 +91,7 @@ public class FarmBlockController extends BaseController {
     @ApiOperation(value = "添加区块")
     @PostMapping(value = "/add")
     public Object add (@RequestBody FarmBlock farmBlock, BindingResult bindingResult) {
-        farmBlockService.save(farmBlock);
+        farmBlockService.saveBlock(farmBlock);
         return ResponseResult.success(null);
     }
 

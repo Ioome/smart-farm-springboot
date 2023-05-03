@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
 import com.farm.entity.po.FarmPlanting;
+import com.farm.entity.vo.FarmBlockValueAndNameVo;
 import com.farm.mapper.FarmBlockMapper;
 import com.farm.mapper.FarmPlantingMapper;
 import com.farm.service.FarmBlockService;
@@ -51,7 +52,10 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
      */
     @Override
     public FarmBlock getOne (Long id) {
-        return farmBlockMapper.selectById(id);
+        FarmBlock farmBlock = farmBlockMapper.selectById(id);
+        List<FarmPlanting> farmPlantings = farmPlantingMapper.selectList(new QueryWrapper<FarmPlanting>().lambda().eq(FarmPlanting::getBlockId, id));
+        
+        return farmBlock;
     }
 
     /**
@@ -130,5 +134,10 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
     public void saveBlock (FarmBlock farmBlock) {
         farmBlock.setStatus(1L);
         farmBlockMapper.insert(farmBlock);
+    }
+
+    @Override
+    public List<FarmBlockValueAndNameVo> getValueAndName () {
+        return farmBlockMapper.selectFarmBlockValueAndName();
     }
 }

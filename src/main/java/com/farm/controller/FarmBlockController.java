@@ -3,6 +3,7 @@ package com.farm.controller;
 import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
 import com.farm.entity.po.FarmPlanting;
+import com.farm.entity.vo.FarmBlockValueAndNameVo;
 import com.farm.exception.FarmExceptionEnum;
 import com.farm.restful.BaseController;
 import com.farm.service.FarmBlockService;
@@ -107,6 +108,14 @@ public class FarmBlockController extends BaseController {
     public Object getRecycle (@RequestBody FarmBlockDto param) {
         farmBlockService.getRecycle(param.getId());
         return ResponseResult.success();
+    }
+
+
+
+    @ApiOperation("返回区块id 和 name")
+    @PostMapping(value = "getValueAndName")
+    public Object getValueAndName () {
+        return toResult(farmBlockService.getValueAndName());
     }
 
 

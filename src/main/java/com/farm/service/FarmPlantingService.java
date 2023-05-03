@@ -47,4 +47,11 @@ public interface FarmPlantingService extends IService<FarmPlanting> {
      * @return 返回分页数据
      */
     Map<String, Object> pageList (FarmPlantingDto dto);
+
+
+    /**
+     * 新增种植计划表
+     * @param farmPlanting 种植
+     */
+    void insertfarmPlanting (FarmPlanting farmPlanting);
 }

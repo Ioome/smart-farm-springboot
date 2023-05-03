@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
 import com.farm.entity.po.FarmPlanting;
+import com.farm.entity.vo.FarmBlockValueAndNameVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,7 +72,10 @@ public interface FarmBlockService extends IService<FarmBlock> {
 
     /**
      * 新增区块
+     *
      * @param farmBlock
      */
     void saveBlock (FarmBlock farmBlock);
+
+    List<FarmBlockValueAndNameVo> getValueAndName ();
 }

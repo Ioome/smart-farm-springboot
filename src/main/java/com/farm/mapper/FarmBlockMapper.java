@@ -2,7 +2,10 @@ package com.farm.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.farm.entity.po.FarmBlock;
+import com.farm.entity.vo.FarmBlockValueAndNameVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author: sutton
@@ -12,4 +15,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface FarmBlockMapper extends BaseMapper<FarmBlock> {
+    List<FarmBlockValueAndNameVo> selectFarmBlockValueAndName ();
 }

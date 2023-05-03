@@ -3,10 +3,13 @@ package com.farm.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.dto.FarmPlantingDto;
+import com.farm.entity.po.FarmAdmin;
 import com.farm.entity.po.FarmPlanting;
+import com.farm.mapper.FarmAdminMapper;
 import com.farm.mapper.FarmPlantingMapper;
 import com.farm.service.FarmPlantingService;
 import com.farm.utils.ResponseResult;
+import com.farm.utils.UserInfoUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +27,9 @@ import java.util.Map;
 public class FarmPlantingServiceImpl extends ServiceImpl<FarmPlantingMapper, FarmPlanting> implements FarmPlantingService {
     @Resource
     private FarmPlantingMapper farmPlantingMapper;
+
+    @Resource
+    private FarmAdminMapper farmAdminMapper;
 
 
     @Override
@@ -53,7 +59,6 @@ public class FarmPlantingServiceImpl extends ServiceImpl<FarmPlantingMapper, Far
     }
 
 
-
     @Override
     public FarmPlanting load (Integer id) {
         return farmPlantingMapper.selectById(id);
@@ -67,5 +72,20 @@ public class FarmPlantingServiceImpl extends ServiceImpl<FarmPlantingMapper, Far
         result.put("pageList", farmPlantingPage.getRecords());
         result.put("totalCount", farmPlantingPage.getTotal());
         return result;
+    }
+
+    /**
+     * 新增种植计划表
+     *
+     * @param farmPlanting 种植
+     */
+    @Override
+    public void insertfarmPlanting (FarmPlanting farmPlanting) {
+        Long userId = UserInfoUtils.getUserId();
+        farmPlanting.setUserId(userId);
+        FarmAdmin farmAdmin = farmAdminMapper.selectById(userId);
+        farmPlanting.setUsername(farmAdmin.getUsername());
+        farmPlanting.setPhoneNumber(farmAdmin.getPhone());
+        farmPlantingMapper.insert(farmPlanting);
     }
 }

@@ -28,7 +28,8 @@ public class FarmPlantingController {
 
     @RequestMapping("/insert")
     public Object insert (FarmPlanting farmPlanting) {
-        return farmPlantingService.insert(farmPlanting);
+        farmPlantingService.insertfarmPlanting(farmPlanting);
+        return;
     }
 
 

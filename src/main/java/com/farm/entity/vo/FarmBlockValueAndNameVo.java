@@ -14,5 +14,5 @@ public class FarmBlockValueAndNameVo {
 
     private Integer id;
 
-    private Integer landName;
+    private String landName;
 }

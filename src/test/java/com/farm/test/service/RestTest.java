@@ -21,9 +21,9 @@ import java.util.Map;
 @Slf4j
 class RestTest {
 
+
     @Resource
     private RestTemplate restTemplate;
-
 
     /**
      * 获取实时天气

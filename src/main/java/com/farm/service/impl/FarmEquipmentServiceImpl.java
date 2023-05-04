@@ -3,7 +3,8 @@ package com.farm.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.constant.Constant;
-import com.farm.entity.po.FarmBlock;
+import com.farm.entity.dto.Now;
+import com.farm.entity.dto.RealTimeWeatherDto;
 import com.farm.entity.po.FarmEquipment;
 import com.farm.exception.MyException;
 import com.farm.mapper.FarmBlockMapper;
@@ -13,7 +14,9 @@ import com.farm.utils.EquipmentUtils;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -42,6 +45,15 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
 
     @Resource
     private FarmBlockMapper blockMapper;
+
+
+    @Value("${real.weather.key}")
+    private String value;
+
+
+    @Resource
+    private RestTemplate restTemplate;
+
 
     /**
      * 从设备获取响应的信息
@@ -215,6 +227,36 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
     public Object getBlock () {
 
         return null;
+    }
+
+    /**
+     * 设置第三方数据
+     */
+    @Override
+    public void setApiData () {
+        RealTimeWeatherDto forObject = restTemplate.getForObject("https://devapi.qweather.com/v7/weather/now?location=101010100&key={key}", RealTimeWeatherDto.class, value);
+        Now now = forObject.getNow();
+        if (isNull(now)) {
+            throw new MyException("获取天气失败");
+        }
+        List<FarmEquipment> farmEquipments = farmEquipmentMapper.selectList(null);
+        if (isEmpty(farmEquipments)) {
+            throw new MyException("设备不存在");
+        }
+        for (FarmEquipment farmEquipment : farmEquipments) {
+            if (farmEquipment.getEquipmentType().equals(Constant.FarmTypeConstant.TEMP.toString())) {
+                farmEquipment.setData(now.getTemp());
+            }
+            if (farmEquipment.getEquipmentType().equals(Constant.FarmTypeConstant.AIR_HUN.toString())) {
+                farmEquipment.setData(now.getHumidity());
+            }
+            if (farmEquipment.getEquipmentType().equals(Constant.FarmTypeConstant.RAILFALL.toString())) {
+                farmEquipment.setData(now.getPrecip());
+            }
+            farmEquipmentMapper.updateById(farmEquipment);
+        }
+        logger.info("设置天气成功");
+
     }
 
 

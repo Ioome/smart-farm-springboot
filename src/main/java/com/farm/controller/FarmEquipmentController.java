@@ -9,14 +9,17 @@ import com.farm.mapper.FarmEquipmentMapper;
 import com.farm.restful.BaseController;
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.ResponseResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -34,6 +37,9 @@ public class FarmEquipmentController extends BaseController {
     @Resource
     private FarmEquipmentService farmEquipmentService;
 
+    @Autowired
+    private FarmEquipmentMapper farmEquipmentMapper;
+
 
     /**
      * <a href="http://localhost:9241/farm/api/saveEquipment">...</a>
@@ -49,8 +55,12 @@ public class FarmEquipmentController extends BaseController {
     }
 
 
-    @Autowired
-    private FarmEquipmentMapper farmEquipmentMapper;
+    @ApiOperation(value = "设置第三方 api")
+    @PostMapping(value = "/setData")
+    public Object setData(){
+        farmEquipmentService.setApiData();
+        return ResponseResult.success();
+    }
 
     /**
      * 删除

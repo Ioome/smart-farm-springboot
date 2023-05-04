@@ -244,6 +244,7 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             throw new MyException("设备不存在");
         }
         for (FarmEquipment farmEquipment : farmEquipments) {
+            farmEquipment.setSendTime(new Date());
             if (farmEquipment.getEquipmentType().equals(Constant.FarmTypeConstant.TEMP.toString())) {
                 farmEquipment.setData(now.getTemp());
             }

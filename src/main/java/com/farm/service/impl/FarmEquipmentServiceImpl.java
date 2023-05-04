@@ -235,10 +235,11 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
     @Override
     public void setApiData () {
         RealTimeWeatherDto forObject = restTemplate.getForObject("https://devapi.qweather.com/v7/weather/now?location=101010100&key={key}", RealTimeWeatherDto.class, value);
-        Now now = forObject.getNow();
-        if (isNull(now)) {
+        if (isNull(forObject.getNow())) {
             throw new MyException("获取天气失败");
         }
+        Now now = forObject.getNow();
+
         List<FarmEquipment> farmEquipments = farmEquipmentMapper.selectList(null);
         if (isEmpty(farmEquipments)) {
             throw new MyException("设备不存在");

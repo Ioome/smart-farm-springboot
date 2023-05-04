@@ -35,6 +35,8 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 3000ms # 连接超时时间（毫秒）
+  application:
+    name: myfarm
   # 启动打印
   banner:
     charset: UTF-8
@@ -60,3 +62,12 @@ mybatis-plus:
       logic-not-delete-value: "null"
       logic-delete-value: now()
       logic-delete-field: delete_time
+management:
+  endpoints:
+    web:
+      exposure:
+        # 暴露端点`/actuator/prometheus`
+        include: 'prometheus'
+  metrics:
+    tags:
+      application: ${spring.application.name}

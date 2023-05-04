@@ -36,7 +36,7 @@ public class OrderTimeTaskImpl {
         logger.info("测试定时任务 {}", new Date());
     }
 
-    @Scheduled(cron ="*/10 * * * * *")
+//    @Scheduled(cron ="*/10 * * * * *")
     private void setData () {
         logger.info("设置硬件数据 {}", new Date());
         farmEquipmentService.setApiData();

@@ -98,7 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs/**"
                 )
                 .permitAll()
-                .antMatchers("/api/admin/login", "/api/admin/register", "/api/admin/logout","/actuator")
+                .antMatchers("/api/admin/login", "/api/admin/register", "/api/admin/logout","/actuator","/farm/actuator/prometheus")
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()

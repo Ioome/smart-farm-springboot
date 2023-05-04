@@ -95,4 +95,5 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
      * @return
      */
     Object getBlock ();
+    
 }

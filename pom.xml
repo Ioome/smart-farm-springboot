@@ -26,6 +26,13 @@
             <version>3.0.4</version>
         </dependency>
 
+        <!--使用httpclient实现http客户端-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.6</version>
+        </dependency>
+
         <!-- Ip地址获取 -->
         <dependency>
             <groupId>net.dreamlu</groupId>

@@ -2,7 +2,6 @@ package com.farm.controller;
 
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.ResponseResult;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -103,5 +102,12 @@ public class BigDataController {
     @GetMapping("getBlock")
     public Object getBlock () {
         return ResponseResult.success(farmEquipmentService.getBlock());
+    }
+
+
+    @ApiOperation("getRunTime")
+    @GetMapping("getRunTime")
+    public Object getRunTime () {
+        return ResponseResult.success(farmEquipmentService.getSunShine());
     }
 }

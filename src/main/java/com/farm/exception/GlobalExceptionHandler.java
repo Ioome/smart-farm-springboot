@@ -1,7 +1,6 @@
 package com.farm.exception;
 
 import com.farm.restful.ResultModel;
-import com.farm.utils.ResponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -39,7 +38,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Object handleException (MyException e) {
         log.error("MyException: ", e);
-        return ResultModel.error(e.getMessage() );
+        return ResultModel.error(e.getMessage());
     }
 
 

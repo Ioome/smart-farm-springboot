@@ -75,9 +75,6 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             logger.info("解析失败");
             throw new MyException("解析失败");
         }
-        //将数据除以10 parse 4 除以10
-        BigDecimal finalData = new BigDecimal(parse.get(4)).divide(new BigDecimal(10));
-        logger.info("解析后的数据:{}", finalData);
         for (String param : parse) {
             logger.info("解析后的参数:{}", param);
         }
@@ -86,7 +83,8 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         if (isNotNull(farmEquipment)) {
             logger.info("设备已经存在");
             farmEquipment.setSendTime(new Date());
-            farmEquipment.setData(String.valueOf(finalData));
+            farmEquipment.setData(parse.get(4));
+            farmEquipment.setUpdateTime(new Date());
             //更新
             farmEquipmentMapper.update(farmEquipment, new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getChannelId, equipmentNumber));
         }
@@ -99,7 +97,7 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         //绑定设备
         if (isNull(farmEquipment)) {
             FarmEquipment data = new FarmEquipment();
-            data.setData(String.valueOf(finalData));
+            data.setData(parse.get(4));
             data.setClientIp(((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().getHostAddress());
             data.setChannelId(equipmentNumber);
             data.setEquipmentName(parse.get(0));

@@ -82,7 +82,7 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             logger.info("解析后的参数:{}", param);
         }
         String equipmentNumber = ctx.channel().id().toString();
-        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getChannelId, equipmentNumber));
+        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getChannelId, parse.get(2)));
         if (isNotNull(farmEquipment)) {
             logger.info("设备已经存在");
             farmEquipment.setSendTime(new Date());

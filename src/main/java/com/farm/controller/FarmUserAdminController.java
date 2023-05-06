@@ -3,18 +3,14 @@ package com.farm.controller;
 import com.farm.entity.dto.FarmAdminInfoDto;
 import com.farm.entity.po.FarmAdmin;
 import com.farm.entity.vo.FarmAdminVo;
-import com.farm.exception.FarmExceptionEnum;
 import com.farm.exception.MyException;
 import com.farm.service.FarmAdminService;
 import com.farm.utils.ResponseResult;
-import com.farm.validation.group.RegisterGroup;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,10 +18,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * <a href="http://localhost:9241/farm/api/admin">...</a>
+ *
  * @name: FarmUserAdminController
  * @author: sutton
  * @date: 2023-04-27 10:26
- * @description: FarmUserAdminController
+ * @description: 用户管理
  */
 
 @Slf4j
@@ -42,7 +40,6 @@ public class FarmUserAdminController {
      * <a href="http://localhost:9241/api/admin/register">...</a>
      *
      * @param umsAdminParam 注册信息
-     * @param result        返回结果
      * @return 返回 json
      */
     @ApiOperation(value = "用户注册")
@@ -53,7 +50,7 @@ public class FarmUserAdminController {
         if (umsAdmin == null) {
             throw new MyException("注册失败");
         }
-        return ResponseResult.success("注册成功,某古同志看到了，那么他就是一大傻逼，世界上最大的傻逼");
+        return ResponseResult.success();
     }
 
 
@@ -93,6 +90,14 @@ public class FarmUserAdminController {
     }
 
 
+    /**
+     * <a href="http://localhost:9241/api/admin/userInfo">...</a>
+     *
+     * @param null
+     * @return 返回 结果
+     * @author: sutton
+     * @date: 2021/6/1 10:26
+     */
     @ApiOperation(value = "获取用户信息")
     @PostMapping(value = "/userInfo")
     public Object getUserInfo () {
@@ -104,6 +109,12 @@ public class FarmUserAdminController {
     }
 
 
+    /**
+     * <a href="http://localhost:9241/api/admin/updateInfo">updataInfo</a>
+     *
+     * @param dto 用户信息
+     * @return 返回修改成功的数据
+     */
     @ApiOperation(value = "更新用户信息")
     @PostMapping(value = "/updateInfo")
     public Object updateInfo (@RequestBody FarmAdminInfoDto dto) {

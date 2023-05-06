@@ -35,6 +35,8 @@ jobs:
         run:
           # 展示 哈希
           git log -1
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
       # 比较日志
       - name: Show diff
         run:

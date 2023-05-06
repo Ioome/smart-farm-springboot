@@ -86,7 +86,7 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             farmEquipment.setData(parse.get(4));
             farmEquipment.setUpdateTime(new Date());
             //更新
-            farmEquipmentMapper.update(farmEquipment, new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getChannelId, equipmentNumber));
+            farmEquipmentMapper.update(farmEquipment, new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, parse.get(2)));
         }
 
         //循环判断

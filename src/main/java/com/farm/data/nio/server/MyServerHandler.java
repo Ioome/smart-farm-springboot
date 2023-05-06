@@ -51,9 +51,6 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
         String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         logger.info("date {}", format);
-
-
-
         farmEquipmentService.saveEquipment(ctx, msg);
         String str = "服务端收到: " + new Date() + " " + msg + "\r\n" + "请与后台人员核对数据";
         ByteBuf buf = Unpooled.buffer(str.getBytes().length);
@@ -67,6 +64,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught (ChannelHandlerContext ctx, Throwable cause) throws Exception {
         ctx.close();
+        cause.printStackTrace();
         logger.info("异常信息1：{}\r\n", cause.getMessage());
     }
 

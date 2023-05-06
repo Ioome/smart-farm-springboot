@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
@@ -62,6 +63,7 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
      * @param msg 消息
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveEquipment (ChannelHandlerContext ctx, Object msg) {
         logger.info("saveEquipment............");
         logger.info("收到的消息为: {}", ctx);
@@ -92,7 +94,6 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         //循环判断
         if (parse.size() < 5) {
             logger.info("解析失败");
-            throw new RuntimeException("解析失败");
         }
 
         //绑定设备

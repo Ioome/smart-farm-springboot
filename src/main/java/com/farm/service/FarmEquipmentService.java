@@ -4,6 +4,7 @@ package com.farm.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.farm.entity.po.FarmEquipment;
+import com.farm.entity.vo.FarmPlantVo;
 import com.farm.entity.vo.FarmTempTrendVo;
 import io.netty.channel.ChannelHandlerContext;
 import org.springframework.stereotype.Service;
@@ -110,7 +111,16 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
 
     /**
      * 获取土壤湿度
+     *
      * @return 返回突然湿度
      */
     Object getHumidityRend ();
+
+
+    /**
+     * 获取漏斗对象
+     *
+     * @return 返回漏斗对象
+     */
+    List<FarmPlantVo> getFunnel ();
 }

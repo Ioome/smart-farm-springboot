@@ -8,10 +8,12 @@ import com.farm.entity.dto.RealTimeWeatherDto;
 import com.farm.entity.po.FarmEquipment;
 import com.farm.entity.po.WeatherData;
 import com.farm.entity.vo.FarmHumidityTrendVo;
+import com.farm.entity.vo.FarmPlantVo;
 import com.farm.entity.vo.FarmTempTrendVo;
 import com.farm.exception.MyException;
 import com.farm.mapper.FarmBlockMapper;
 import com.farm.mapper.FarmEquipmentMapper;
+import com.farm.mapper.FarmPlantMapper;
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.EquipmentUtils;
 import io.netty.channel.ChannelHandlerContext;
@@ -54,6 +56,8 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
     private FarmBlockMapper blockMapper;
 
 
+    @Resource
+    private FarmPlantMapper farmPlantMapper;
     @Value("${real.weather.key}")
     private String value;
 
@@ -310,6 +314,16 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         }
 
         return forObject;
+    }
+
+    /**
+     * 获取漏斗对象
+     *
+     * @return 返回漏斗对象
+     */
+    @Override
+    public List<FarmPlantVo> getFunnel () {
+        return null;
     }
 
 

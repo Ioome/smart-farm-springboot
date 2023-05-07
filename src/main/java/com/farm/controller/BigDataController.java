@@ -160,6 +160,12 @@ public class BigDataController {
     }
 
 
+    @ApiOperation("获取漏斗图")
+    @GetMapping("/getFunnel")
+    public Object getFunnel () {
+        return ResponseResult.success(farmEquipmentService.getFunnel());
+    }
+
     @ApiOperation("getRunTime")
     @GetMapping("getRunTime")
     public Object getRunTime () {

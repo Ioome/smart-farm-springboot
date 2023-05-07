@@ -3,6 +3,7 @@ package com.farm.test.service;
 import com.farm.entity.po.WeatherData;
 import com.farm.entity.vo.FarmTempTrendVo;
 import com.farm.exception.MyException;
+import com.farm.utils.CodeGeneratorUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +38,7 @@ public class IpTest {
     private RestTemplate restTemplate;
 
 
+
     @Test
     void test () {
 
@@ -51,5 +54,11 @@ public class IpTest {
 
         logger.info("farmTempTrendVos: {}", farmTempTrendVos);
         logger.info("获取成功");
+    }
+
+    @Test
+    void testGenerate () {
+        String s = CodeGeneratorUtil.generateLandCode();
+        logger.info("s: {}", s);
     }
 }

@@ -140,6 +140,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
         Long id = farmBlocks.get(farmBlocks.size() - 1).getId();
         String s = CodeGeneratorUtil.generateCode(id + 1);
         farmBlock.setCode(s);
+        farmBlock.setLandCode(CodeGeneratorUtil.generateLandCode());
         farmBlockMapper.insert(farmBlock);
     }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.farm.mapper.FarmPlantMapper">
+
+    <select id="getFunnel" resultType="com.farm.entity.vo.FarmPlantVo">
+        SELECT COUNT(DISTINCT plant_classification) AS value, plant_classification AS name
+        FROM farm_plant
+        GROUP BY plant_classification;
+    </select>
+</mapper>

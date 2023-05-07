@@ -324,7 +324,7 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
      */
     @Override
     public List<FarmPlantVo> getFunnel () {
-        return null;
+        return farmPlantMapper.getFunnel();
     }
 
     @Override

@@ -10,11 +10,13 @@ import com.farm.entity.vo.FarmBlockValueAndNameVo;
 import com.farm.mapper.FarmBlockMapper;
 import com.farm.mapper.FarmPlantingMapper;
 import com.farm.service.FarmBlockService;
+import com.farm.utils.CodeGeneratorUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 
@@ -133,6 +135,11 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
     @Override
     public void saveBlock (FarmBlock farmBlock) {
         farmBlock.setStatus(1L);
+        List<FarmBlock> farmBlocks = farmBlockMapper.selectList(null).stream().sorted().collect(Collectors.toList());
+        //取出最后一个id
+        Long id = farmBlocks.get(farmBlocks.size() - 1).getId();
+        String s = CodeGeneratorUtil.generateCode(id + 1);
+        farmBlock.setCode(s);
         farmBlockMapper.insert(farmBlock);
     }
 

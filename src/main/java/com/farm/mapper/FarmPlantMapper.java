@@ -2,7 +2,10 @@ package com.farm.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.farm.entity.po.FarmPlant;
+import com.farm.entity.vo.FarmPlantVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author sutton
@@ -10,4 +13,12 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2023-05-01
  */
 @Mapper
-public interface FarmPlantMapper extends BaseMapper<FarmPlant> {}
+public interface FarmPlantMapper extends BaseMapper<FarmPlant> {
+
+    /**
+     * 大数据接口获取植物信息
+     *
+     * @returns  List<FarmPlantVo>  返回 name value
+     */
+    List<FarmPlantVo> getFunnel ();
+}

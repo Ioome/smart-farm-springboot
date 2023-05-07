@@ -47,6 +47,9 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
     @Resource
     private FarmEquipmentMapper farmEquipmentMapper;
 
+
+    @Resource
+    private FarmBlockMapper farmBlockMapper;
     @Resource
     private FarmBlockMapper blockMapper;
 
@@ -231,8 +234,8 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
 
     @Override
     public Object getBlock () {
-
-        return null;
+        long count = farmBlockMapper.selectList(null).stream().count();
+        return count;
     }
 
     /**

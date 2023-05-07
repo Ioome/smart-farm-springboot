@@ -148,13 +148,13 @@ public class BigDataController {
     }
 
     @ApiOperation(value = "获取湿度趋势")
-    @GetMapping("/humidityRend")
+    @GetMapping("/getHumidityRend")
     public Object getHumidityRend () {
         return ResponseResult.success(farmEquipmentService.getHumidityRend());
     }
 
     @ApiOperation("获取区块")
-    @GetMapping("getBlock")
+    @GetMapping("/getBlockCount")
     public Object getBlock () {
         return ResponseResult.success(farmEquipmentService.getBlock());
     }

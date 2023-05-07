@@ -22,10 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -134,11 +132,13 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
      */
     @Override
     public String getTemperature () {
-        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.TEMP));
-        if (isNull(farmEquipment)) {
-            throw new MyException("设备不存在");
+        RealTimeWeatherDto forObject = restTemplate.getForObject("https://devapi.qweather.com/v7/weather/now?location=101010100&key={key}", RealTimeWeatherDto.class, value);
+        if (isNull(forObject.getNow())) {
+            throw new MyException("获取天气失败");
         }
-        return farmEquipment.getData();
+        Now now = forObject.getNow();
+
+        return now.getTemp();
     }
 
     /**
@@ -219,11 +219,13 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
      */
     @Override
     public String getLandTemp () {
-        FarmEquipment farmEquipment = farmEquipmentMapper.selectOne(new QueryWrapper<FarmEquipment>().lambda().eq(FarmEquipment::getEquipmentType, Constant.FarmTypeConstant.LAND_HUN));
-        if (isNull(farmEquipment)) {
-            throw new MyException("设备不存在");
+        RealTimeWeatherDto forObject = restTemplate.getForObject("https://devapi.qweather.com/v7/weather/now?location=101010100&key={key}", RealTimeWeatherDto.class, value);
+        if (isNull(forObject.getNow())) {
+            throw new MyException("获取天气失败");
         }
-        return farmEquipment.getData();
+        Now now = forObject.getNow();
+
+        return now.getHumidity();
     }
 
     @Override

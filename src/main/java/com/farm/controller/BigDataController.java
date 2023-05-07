@@ -3,7 +3,6 @@ package com.farm.controller;
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -122,15 +121,14 @@ public class BigDataController {
     }
 
 
-
     @GetMapping(value = "/getWeekY")
     @ApiOperation(value = "获取 y 轴")
     public Object getWeekY () {
         List<Integer> result = new ArrayList<>();
         int minTemp = -5;
         int maxTemp = 35;
-        int tickInterval = 10; //设置y轴刻度值为10
-        for (int i = minTemp; i <= maxTemp; i+=tickInterval) {
+        int tickInterval = 10;
+        for (int i = minTemp; i <= maxTemp; i += tickInterval) {
             result.add(i);
         }
         return ResponseResult.success(result);

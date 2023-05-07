@@ -120,6 +120,13 @@ public class BigDataController {
         return ResponseResult.success(week);
     }
 
+    @GetMapping(value = "/getWeekX")
+    @ApiOperation(value = "获取 x 轴")
+    public Object getAWeek () {
+        List<String> week=farmEquipmentService.getWeekX();
+        return ResponseResult.success(week);
+    }
+
 
     @GetMapping(value = "/getWeekY")
     @ApiOperation(value = "获取 y 轴")

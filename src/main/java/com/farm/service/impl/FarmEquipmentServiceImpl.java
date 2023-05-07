@@ -29,6 +29,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static cn.hutool.core.util.ObjectUtil.isEmpty;
 import static cn.hutool.core.util.ObjectUtil.isNotNull;
@@ -324,6 +325,16 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
     @Override
     public List<FarmPlantVo> getFunnel () {
         return null;
+    }
+
+    @Override
+    public List<String> getWeekX () {
+        WeatherData forObject = restTemplate.getForObject("https://devapi.qweather.com/v7/grid-weather/7d?location=116.41,39.92&key={key}", WeatherData.class, value);
+        if (isNull(forObject.getDaily())) {
+            throw new MyException("获取天气失败");
+        }
+        List<String> collect = forObject.getDaily().stream().map(WeatherData.DailyWeatherData::getFxDate).collect(Collectors.toList());
+        return collect;
     }
 
 

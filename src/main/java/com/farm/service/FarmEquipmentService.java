@@ -123,4 +123,6 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
      * @return 返回漏斗对象
      */
     List<FarmPlantVo> getFunnel ();
+
+    List<String> getWeekX ();
 }

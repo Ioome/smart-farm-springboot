@@ -7,6 +7,7 @@ import com.farm.entity.dto.Now;
 import com.farm.entity.dto.RealTimeWeatherDto;
 import com.farm.entity.po.FarmEquipment;
 import com.farm.entity.po.WeatherData;
+import com.farm.entity.vo.FarmHumidityTrendVo;
 import com.farm.entity.vo.FarmTempTrendVo;
 import com.farm.exception.MyException;
 import com.farm.mapper.FarmBlockMapper;
@@ -286,6 +287,26 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         logger.info("farmTempTrendVos: {}", farmTempTrendVos);
         logger.info("获取成功");
         return farmTempTrendVos;
+    }
+
+    /**
+     * 获取土壤湿度
+     *
+     * @return 返回突然湿度
+     */
+    @Override
+    public Object getHumidityRend () {
+        logger.info("开始获取温度趋势");
+        WeatherData forObject = restTemplate.getForObject("https://devapi.qweather.com/v7/grid-weather/7d?location=116.41,39.92&key={key}", WeatherData.class, value);
+        if (isNull(forObject.getDaily())) {
+            throw new MyException("获取天气失败");
+        }
+        List<FarmHumidityTrendVo> farmTempTrendVos = new ArrayList<>();
+        for (WeatherData.DailyWeatherData dailyBean : forObject.getDaily()) {
+            farmTempTrendVos.add(new FarmHumidityTrendVo(dailyBean.getFxDate(), dailyBean.getHumidity()));
+        }
+
+        return forObject;
     }
 
 

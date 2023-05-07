@@ -106,4 +106,11 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
      * @return 获得温度趋势
      */
     List<FarmTempTrendVo> getTemptrend ();
+
+
+    /**
+     * 获取土壤湿度
+     * @return 返回突然湿度
+     */
+    Object getHumidityRend ();
 }

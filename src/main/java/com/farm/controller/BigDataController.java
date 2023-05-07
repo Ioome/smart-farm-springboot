@@ -134,6 +134,19 @@ public class BigDataController {
         return ResponseResult.success(result);
     }
 
+    @GetMapping(value = "/getY")
+    @ApiOperation(value = "获取 y 轴")
+    public Object getY () {
+        List<Integer> result = new ArrayList<>();
+        int minTemp = 0;
+        int maxTemp = 50;
+        int tickInterval = 10;
+        for (int i = minTemp; i <= maxTemp; i += tickInterval) {
+            result.add(i);
+        }
+        return ResponseResult.success(result);
+    }
+
     @ApiOperation(value = "获取温度趋势")
     @GetMapping("/humidityRend")
     public Object getHumidityRend () {

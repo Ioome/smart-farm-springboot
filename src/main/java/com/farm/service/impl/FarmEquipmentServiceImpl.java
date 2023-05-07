@@ -6,6 +6,8 @@ import com.farm.constant.Constant;
 import com.farm.entity.dto.Now;
 import com.farm.entity.dto.RealTimeWeatherDto;
 import com.farm.entity.po.FarmEquipment;
+import com.farm.entity.po.WeatherData;
+import com.farm.entity.vo.FarmTempTrendVo;
 import com.farm.exception.MyException;
 import com.farm.mapper.FarmBlockMapper;
 import com.farm.mapper.FarmEquipmentMapper;
@@ -22,6 +24,8 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -258,6 +262,28 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         }
         logger.info("设置天气成功");
 
+    }
+
+    /**
+     * 获取温度趋势
+     *
+     * @return 获得温度趋势
+     */
+    @Override
+    public List<FarmTempTrendVo> getTemptrend () {
+        logger.info("开始获取温度趋势");
+        WeatherData forObject = restTemplate.getForObject("https://devapi.qweather.com/v7/grid-weather/7d?location=116.41,39.92&key={key}", WeatherData.class, value);
+        if (isNull(forObject.getDaily())) {
+            throw new MyException("获取天气失败");
+        }
+        List<FarmTempTrendVo> farmTempTrendVos = new ArrayList<>();
+        for (WeatherData.DailyWeatherData dailyBean : forObject.getDaily()) {
+            farmTempTrendVos.add(new FarmTempTrendVo(dailyBean.getFxDate(), dailyBean.getTempMax(), dailyBean.getTempMin()));
+        }
+
+        logger.info("farmTempTrendVos: {}", farmTempTrendVos);
+        logger.info("获取成功");
+        return farmTempTrendVos;
     }
 
 

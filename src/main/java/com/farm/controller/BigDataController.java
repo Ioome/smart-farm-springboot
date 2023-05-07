@@ -3,6 +3,7 @@ package com.farm.controller;
 import com.farm.service.FarmEquipmentService;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -95,6 +98,42 @@ public class BigDataController {
     @PostMapping("/getLandTemperature")
     public Object getLandTemperature () {
         return ResponseResult.success(farmEquipmentService.getLandTemp());
+    }
+
+
+    @ApiOperation(value = "获取温度趋势")
+    @GetMapping("/temptRend")
+    public Object getTemptRend () {
+        return ResponseResult.success(farmEquipmentService.getTemptrend());
+    }
+
+    @GetMapping(value = "/getWeek")
+    @ApiOperation(value = "获取 x 轴")
+    public Object getWeek () {
+        List<String> week = new ArrayList<>();
+        week.add("周一");
+        week.add("周二");
+        week.add("周三");
+        week.add("周四");
+        week.add("周五");
+        week.add("周六");
+        week.add("周日");
+        return ResponseResult.success(week);
+    }
+
+
+
+    @GetMapping(value = "/getWeekY")
+    @ApiOperation(value = "获取 y 轴")
+    public Object getWeekY () {
+        List<Integer> result = new ArrayList<>();
+        int minTemp = -5;
+        int maxTemp = 35;
+        int tickInterval = 10; //设置y轴刻度值为10
+        for (int i = minTemp; i <= maxTemp; i+=tickInterval) {
+            result.add(i);
+        }
+        return ResponseResult.success(result);
     }
 
 

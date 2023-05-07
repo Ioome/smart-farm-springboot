@@ -4,6 +4,7 @@ package com.farm.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.farm.entity.po.FarmEquipment;
+import com.farm.entity.vo.FarmTempTrendVo;
 import io.netty.channel.ChannelHandlerContext;
 import org.springframework.stereotype.Service;
 
@@ -97,4 +98,12 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
     Object getBlock ();
 
     void setApiData ();
+
+
+    /**
+     * 获取温度趋势
+     *
+     * @return 获得温度趋势
+     */
+    List<FarmTempTrendVo> getTemptrend ();
 }

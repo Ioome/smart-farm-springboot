@@ -5,10 +5,12 @@ import com.farm.utils.JwtUtil;
 import com.farm.utils.RedisCache;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -42,7 +44,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //从请求头中获取token
         String token = request.getHeader("token");
+        if (request.getMethod().equals(RequestMethod.OPTIONS.name())) {
+            response.setStatus(HttpStatus.OK.value());
+        }
         //StringUtils.hasText(token) 判断字符串是否有值
+
         if (!StringUtils.hasText(token)) {
             //放行
             filterChain.doFilter(request, response);

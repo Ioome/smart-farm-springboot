@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -43,6 +44,7 @@ public class FarmBlock implements Serializable {
     /**
      * 土地期限
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date landTime;
 
 

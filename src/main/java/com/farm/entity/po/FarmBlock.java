@@ -45,7 +45,7 @@ public class FarmBlock implements Serializable {
      * 土地期限
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date landTime;
+    private String landTime;
 
 
     @NotEmpty(message = "could not be empty")

@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    
+
     @Resource
     private CorsInterceptor corsInterceptor;
 

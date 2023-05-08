@@ -120,10 +120,24 @@ public class BigDataController {
         return ResponseResult.success(week);
     }
 
+
+    @GetMapping("/getFunualx")
+    @ApiOperation(value = "返回Funual")
+    public Object get () {
+        List<String> result = new ArrayList<>();
+        result.add("Show");
+        result.add("Click");
+        result.add("Visit'");
+        result.add("Inquiry");
+        result.add("Order");
+        return ResponseResult.success(result);
+    }
+
+
     @GetMapping(value = "/getWeekX")
     @ApiOperation(value = "获取 x 轴")
     public Object getAWeek () {
-        List<String> week=farmEquipmentService.getWeekX();
+        List<String> week = farmEquipmentService.getWeekX();
         return ResponseResult.success(week);
     }
 

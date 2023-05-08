@@ -1,53 +1,47 @@
 package com.farm.entity.po;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * @author www.itgongju.com
+ * @description 区块
+ * @date 2023-05-08
+ */
 @Data
 public class FarmBlock implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(type = IdType.AUTO)
+    /**
+     * 主键
+     */
     private Long id;
 
-
-    @NotEmpty(message = "could not be empty")
     /**
      * 编号
      */
     private String code;
 
-
-    @NotEmpty(message = "could not be empty")
     /**
      * 土地名称
      */
     private String landName;
 
-
-    @NotEmpty(message = "could not be empty")
     /**
      * 土地编码
      */
     private String landCode;
 
-    @NotEmpty(message = "could not be empty")
     /**
      * 土地期限
      */
     private String landTime;
 
-
-    @NotEmpty(message = "could not be empty")
     /**
      * 土地地理位置
      */
@@ -63,26 +57,21 @@ public class FarmBlock implements Serializable {
      */
     private String image;
 
-
-    @NotEmpty(message = "could not be empty")
     /**
      * 规模
      */
     private String scale;
 
-
-    @NotEmpty(message = "could not be empty")
     /**
      * 面积
      */
-    private Integer allArea;
+    private BigDecimal allArea;
 
     /**
      * 适合作物
      */
     private String suitableCrop;
 
-    @NotEmpty(message = "could not be empty")
     /**
      * 详情
      */

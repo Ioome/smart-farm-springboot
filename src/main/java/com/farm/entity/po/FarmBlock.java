@@ -3,6 +3,7 @@ package com.farm.entity.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,7 +34,6 @@ public class FarmBlock implements Serializable {
     private String landName;
 
 
-
     @NotEmpty(message = "could not be empty")
     /**
      * 土地编码
@@ -44,7 +44,7 @@ public class FarmBlock implements Serializable {
     /**
      * 土地期限
      */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date landTime;
 
 

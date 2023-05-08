@@ -15,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -141,6 +143,11 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
         String s = CodeGeneratorUtil.generateCode(id + 1);
         farmBlock.setCode(s);
         farmBlock.setLandCode(CodeGeneratorUtil.generateLandCode());
+        LocalDateTime dateTime = LocalDateTime.parse(farmBlock.getLandTime(), DateTimeFormatter.ISO_DATE_TIME);
+        int year = dateTime.getYear();
+        int month = dateTime.getMonthValue();
+        int day = dateTime.getDayOfMonth();
+        farmBlock.setLandTime(String.valueOf(year));
         farmBlockMapper.insert(farmBlock);
     }
 

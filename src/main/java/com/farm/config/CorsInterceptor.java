@@ -27,7 +27,6 @@ public class CorsInterceptor implements HandlerInterceptor {
             response.setStatus(HttpStatus.NO_CONTENT.value());
             return false;
         }
-
         return true;
     }
 }

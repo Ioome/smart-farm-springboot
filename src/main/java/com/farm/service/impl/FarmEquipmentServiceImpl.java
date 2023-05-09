@@ -337,5 +337,15 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         return collect;
     }
 
+    /**
+     * 返回蔬菜种类
+     *
+     * @return 返回List<String></String>
+     */
+    @Override
+    public List<String> getFunnelPlantList () {
+        return farmPlantMapper.getFunnelPlantList();
+    }
+
 
 }

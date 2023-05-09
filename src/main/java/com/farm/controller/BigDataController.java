@@ -130,6 +130,7 @@ public class BigDataController {
         result.add("Visit'");
         result.add("Inquiry");
         result.add("Order");
+        List<String> plantClass=farmEquipmentService.getFunnelPlantList();
         return ResponseResult.success(result);
     }
 

@@ -7,4 +7,11 @@
         FROM farm_plant
         GROUP BY plant_classification;
     </select>
+
+
+    <select id="getFunnelPlantList" resultType="string">
+        SELECT plant_classification
+        FROM farm_plant
+        GROUP BY plant_classification;
+    </select>
 </mapper>

@@ -125,4 +125,11 @@ public interface FarmEquipmentService extends IService<FarmEquipment> {
     List<FarmPlantVo> getFunnel ();
 
     List<String> getWeekX ();
+
+    /**
+     * 返回蔬菜种类
+     *
+     * @return 返回List<String></String>
+     */
+    List<String> getFunnelPlantList ();
 }

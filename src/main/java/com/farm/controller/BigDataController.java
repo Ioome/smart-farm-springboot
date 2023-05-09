@@ -124,14 +124,7 @@ public class BigDataController {
     @GetMapping("/getFunualx")
     @ApiOperation(value = "返回Funual")
     public Object get () {
-        List<String> result = new ArrayList<>();
-        result.add("Show");
-        result.add("Click");
-        result.add("Visit'");
-        result.add("Inquiry");
-        result.add("Order");
-        List<String> plantClass=farmEquipmentService.getFunnelPlantList();
-        return ResponseResult.success(result);
+        return ResponseResult.success(farmEquipmentService.getFunnelPlantList());
     }
 
 

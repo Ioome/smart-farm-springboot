@@ -131,7 +131,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
      * @param farmBlock 区块信息
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class) 
     public void saveBlock (FarmBlock farmBlock) {
         if (isNull(farmBlock.getLandName())) {
             throw new MyException(FarmExceptionEnum.PARA_NOT_NULL.getMessage());

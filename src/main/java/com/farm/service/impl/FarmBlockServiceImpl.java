@@ -136,12 +136,12 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
      */
     @Override
     public void saveBlock (FarmBlock farmBlock) {
+        String landName = farmBlock.getLandName();
         farmBlock.setStatus(1L);
         List<FarmBlock> farmBlocks = farmBlockMapper.selectList(null).stream().sorted().collect(Collectors.toList());
-        //取出最后一个id
         Long id = farmBlocks.get(farmBlocks.size() - 1).getId();
-        String s = CodeGeneratorUtil.generateCode(id + 1);
-        farmBlock.setCode(s);
+        String code = CodeGeneratorUtil.generateCode(id + 1);
+        farmBlock.setCode(code);
         farmBlock.setLandCode(CodeGeneratorUtil.generateLandCode());
         LocalDateTime dateTime = LocalDateTime.parse(farmBlock.getLandTime(), DateTimeFormatter.ISO_DATE_TIME);
         int year = dateTime.getYear();

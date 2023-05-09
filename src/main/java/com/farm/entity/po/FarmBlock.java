@@ -1,6 +1,7 @@
 package com.farm.entity.po;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -112,4 +113,11 @@ public class FarmBlock implements Serializable {
      */
     @TableLogic
     private Date deleteTime;
+
+
+    /**
+     * 土地金额
+     */
+    @ApiModelProperty("土地金额")
+    private BigDecimal price;
 }

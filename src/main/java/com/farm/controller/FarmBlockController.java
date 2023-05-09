@@ -62,7 +62,7 @@ public class FarmBlockController extends BaseController {
      */
     @ApiOperation(value = "返回某个区块的信息")
     @PostMapping(value = "/getOne")
-    public Object getOne (@RequestBody FarmBlock farmBlock, BindingResult bindingResult) {
+    public Object getOne (@RequestBody FarmBlock farmBlock) {
         FarmBlock block = farmBlockService.getOne(farmBlock.getId());
         return ResponseResult.success(block);
     }
@@ -90,7 +90,7 @@ public class FarmBlockController extends BaseController {
      */
     @ApiOperation(value = "添加区块")
     @PostMapping(value = "/add")
-    public Object add (@RequestBody FarmBlock farmBlock, BindingResult bindingResult) {
+    public Object add (@RequestBody FarmBlock farmBlock) {
         farmBlockService.saveBlock(farmBlock);
         return ResponseResult.success(null);
     }

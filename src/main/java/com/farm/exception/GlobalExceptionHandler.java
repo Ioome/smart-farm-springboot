@@ -1,6 +1,7 @@
 package com.farm.exception;
 
 import com.farm.restful.ResultModel;
+import com.farm.utils.ResponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -31,7 +32,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Object handleException (Exception e) {
         log.error("Default Exception: ", e);
-        return ResultModel.error("后台异常");
+        return ResponseResult.fail(e.getMessage());
     }
 
     @ExceptionHandler(MyException.class)

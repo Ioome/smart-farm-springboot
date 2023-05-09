@@ -13,6 +13,7 @@ import com.farm.service.FarmBlockService;
 import com.farm.utils.CodeGeneratorUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -75,7 +76,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
             throw new Exception("数据不存在");
         }
         List<FarmPlanting> farmPlantings = farmPlantingMapper.selectList(new QueryWrapper<FarmPlanting>().lambda().eq(FarmPlanting::getBlockId, id));
-        if (isNull(farmPlantings) || farmPlantings.size() == 0) {
+        if (isNull(farmPlantings) || farmPlantings.isEmpty()) {
             return farmBlockMapper.deleteById(id);
         }
         for (FarmPlanting farmPlanting : farmPlantings) {
@@ -135,6 +136,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
      * @param farmBlock 区块信息
      */
     @Override
+    @Transactional()
     public void saveBlock (FarmBlock farmBlock) {
         String landName = farmBlock.getLandName();
         farmBlock.setStatus(1L);

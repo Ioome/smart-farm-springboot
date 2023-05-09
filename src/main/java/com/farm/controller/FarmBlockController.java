@@ -9,7 +9,6 @@ import com.farm.service.FarmBlockService;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -56,8 +55,7 @@ public class FarmBlockController extends BaseController {
     /**
      * <a href="http://localhost:9241/api/block/getOne">返回区块</a>
      *
-     * @param farmBlock     区块信息
-     * @param bindingResult 校验结果
+     * @param farmBlock 区块信息
      * @return block
      */
     @ApiOperation(value = "返回某个区块的信息")

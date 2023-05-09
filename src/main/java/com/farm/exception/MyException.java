@@ -42,6 +42,13 @@ public class MyException extends RuntimeException {
     this.code = errorCode.getCode();
     this.message = errorCode.getDesc();
   }
+
+  public MyException(FarmExceptionEnum exceptionEnum,Exception e)
+  {
+    this.code=exceptionEnum.getCode();
+    this.message=exceptionEnum.getMessage();
+    this.e=e;
+  }
   public MyException(String message) {
     this.message = message;
   }

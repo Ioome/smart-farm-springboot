@@ -142,9 +142,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
         String code = CodeGeneratorUtil.generateCode(id + 1);
         farmBlock.setCode(code);
         farmBlock.setLandCode(CodeGeneratorUtil.generateLandCode());
-        LocalDateTime dateTime = LocalDateTime.parse(farmBlock.getLandTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        int year = dateTime.getYear();
-        farmBlock.setLandTime(String.valueOf(year));
+        farmBlock.setLandTime(farmBlock.getLandTime());
         farmBlockMapper.insert(farmBlock);
     }
 

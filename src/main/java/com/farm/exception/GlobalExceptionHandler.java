@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Object handleException (MyException e) {
         log.error("MyException: ", e);
-        return ResultModel.error(e.getMessage());
+        return ResponseResult.fail(e.getMessage());
     }
 
 

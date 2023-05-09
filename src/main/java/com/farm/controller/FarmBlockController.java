@@ -83,7 +83,6 @@ public class FarmBlockController extends BaseController {
      * <a href="http://localhost:9241/api/block/register">新增区块</a>
      *
      * @param farmBlock     区块信息
-     * @param bindingResult 校验结果
      * @return block
      */
     @ApiOperation(value = "添加区块")

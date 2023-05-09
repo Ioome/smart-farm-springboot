@@ -258,6 +258,7 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
         if (isEmpty(farmEquipments)) {
             throw new MyException("设备不存在");
         }
+        //土壤温度，和  空气湿度
         for (FarmEquipment farmEquipment : farmEquipments) {
             farmEquipment.setSendTime(new Date());
             if (farmEquipment.getEquipmentType().equals(Constant.FarmTypeConstant.TEMP.toString())) {
@@ -265,9 +266,6 @@ public class FarmEquipmentServiceImpl extends ServiceImpl<FarmEquipmentMapper, F
             }
             if (farmEquipment.getEquipmentType().equals(Constant.FarmTypeConstant.AIR_HUN.toString())) {
                 farmEquipment.setData(now.getHumidity());
-            }
-            if (farmEquipment.getEquipmentType().equals(Constant.FarmTypeConstant.RAILFALL.toString())) {
-                farmEquipment.setData(now.getPrecip());
             }
             farmEquipmentMapper.updateById(farmEquipment);
         }

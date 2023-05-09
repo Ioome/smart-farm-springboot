@@ -136,7 +136,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
      * @param farmBlock 区块信息
      */
     @Override
-    @Transactional()
+    @Transactional(rollbackFor = Exception.class)
     public void saveBlock (FarmBlock farmBlock) {
         String landName = farmBlock.getLandName();
         farmBlock.setStatus(1L);

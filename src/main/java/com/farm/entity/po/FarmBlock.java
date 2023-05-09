@@ -14,9 +14,8 @@ import java.util.Date;
  * @date 2023-05-08
  */
 @Data
-public class FarmBlock implements Serializable {
+public class FarmBlock{
 
-    private static final long serialVersionUID = 1L;
 
     /**
      * 主键

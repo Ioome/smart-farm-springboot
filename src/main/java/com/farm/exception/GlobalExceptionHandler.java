@@ -31,8 +31,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Object handleException (Exception e) {
+        log.error(e.getLocalizedMessage(), e);
         log.error("Default Exception: ", e);
-        return ResponseResult.fail(e.getMessage());
+        return ResponseResult.fail(e, e.getMessage());
     }
 
     @ExceptionHandler(MyException.class)

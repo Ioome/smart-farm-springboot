@@ -7,6 +7,8 @@ import com.farm.entity.dto.FarmBlockDto;
 import com.farm.entity.po.FarmBlock;
 import com.farm.entity.po.FarmPlanting;
 import com.farm.entity.vo.FarmBlockValueAndNameVo;
+import com.farm.exception.FarmExceptionEnum;
+import com.farm.exception.MyException;
 import com.farm.mapper.FarmBlockMapper;
 import com.farm.mapper.FarmPlantingMapper;
 import com.farm.service.FarmBlockService;
@@ -95,14 +97,7 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
      */
     @Override
     public List<FarmBlock> getBlockList (FarmBlockDto dto) {
-        Page<FarmBlock> page = farmBlockMapper.selectPage(dto.getPageObj(), new QueryWrapper<FarmBlock>()
-                .lambda()
-                .like(StringUtils.isNoneBlank(dto.getCode()), FarmBlock::getCode, dto.getCode())
-                .eq(StringUtils.isNoneBlank(dto.getArea()), FarmBlock::getAllArea, dto.getArea())
-                .eq(StringUtils.isNoneBlank(dto.getStatus()), FarmBlock::getStatus, dto.getStatus())
-                .le(StringUtils.isNoneBlank(dto.getStartTime()), FarmBlock::getCreatedTime, dto.getStartTime())
-                .ge(StringUtils.isNoneBlank(dto.getEndTime()), FarmBlock::getCreatedTime, dto.getEndTime())
-                .orderByDesc(FarmBlock::getCreatedTime));
+        Page<FarmBlock> page = farmBlockMapper.selectPage(dto.getPageObj(), new QueryWrapper<FarmBlock>().lambda().like(StringUtils.isNoneBlank(dto.getCode()), FarmBlock::getCode, dto.getCode()).eq(StringUtils.isNoneBlank(dto.getArea()), FarmBlock::getAllArea, dto.getArea()).eq(StringUtils.isNoneBlank(dto.getStatus()), FarmBlock::getStatus, dto.getStatus()).le(StringUtils.isNoneBlank(dto.getStartTime()), FarmBlock::getCreatedTime, dto.getStartTime()).ge(StringUtils.isNoneBlank(dto.getEndTime()), FarmBlock::getCreatedTime, dto.getEndTime()).orderByDesc(FarmBlock::getCreatedTime));
         return page.getRecords();
     }
 
@@ -138,6 +133,9 @@ public class FarmBlockServiceImpl extends ServiceImpl<FarmBlockMapper, FarmBlock
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveBlock (FarmBlock farmBlock) {
+        if (isNull(farmBlock.getLandName())) {
+            throw new MyException(FarmExceptionEnum.PARA_NOT_NULL.getMessage());
+        }
         farmBlock.setStatus(1L);
         List<FarmBlock> farmBlocks = farmBlockMapper.selectList(null);
         Long id = farmBlocks.get(farmBlocks.size() - 1).getId();

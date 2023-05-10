@@ -1,7 +1,10 @@
 package com.farm.aspect;
 
+import lombok.extern.log4j.Log4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
@@ -10,39 +13,42 @@ import org.springframework.stereotype.Component;
  */
 @EnableAspectJAutoProxy
 @Component
+@Log4j
 @Aspect
 public class LogAspect {
+
+    private final static Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
     /**
      * define point cut.
      */
     @Pointcut("execution(* com.farm.service.*.*(..))")
-    private void pointCutMethod() {
+    private void pointCutMethod () {
     }
 
 
-    /**
-     * 环绕通知.
-     *
-     * @param pjp pjp
-     * @return obj
-     * @throws Throwable exception
-     */
     @Around("pointCutMethod()")
-    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("-----------------------");
-        System.out.println("环绕通知: 进入方法");
-        Object o = pjp.proceed();
-        System.out.println("环绕通知: 退出方法");
-        return o;
+    public Object logMethodExecutionTime (ProceedingJoinPoint joinPoint) throws Throwable {
+        long startTime = System.currentTimeMillis();
+
+        logger.info("Method " + joinPoint.getSignature().getName() + " started");
+
+        Object result = joinPoint.proceed();
+
+        long endTime = System.currentTimeMillis();
+
+        logger.info("Method " + joinPoint.getSignature().getName() + " ended");
+        logger.info("Method " + joinPoint.getSignature().getName() + " execution time : " + (endTime - startTime) + "ms");
+
+        return result;
     }
 
     /**
      * 前置通知.
      */
     @Before("pointCutMethod()")
-    public void doBefore() {
-        System.out.println("前置通知");
+    public void doBefore () {
+        logger.info("方法开始执行...............");
     }
 
 
@@ -52,8 +58,8 @@ public class LogAspect {
      * @param result return val
      */
     @AfterReturning(pointcut = "pointCutMethod()", returning = "result")
-    public void doAfterReturning(String result) {
-        System.out.println("后置通知, 返回值: " + result);
+    public void doAfterReturning (String result) {
+        logger.info("后置通知, 返回值: " + result);
     }
 
     /**
@@ -62,16 +68,9 @@ public class LogAspect {
      * @param e exception
      */
     @AfterThrowing(pointcut = "pointCutMethod()", throwing = "e")
-    public void doAfterThrowing(Exception e) {
-        System.out.println("异常通知, 异常: " + e.getMessage());
+    public void doAfterThrowing (Exception e) {
+        logger.info("异常通知, 异常: " + e.getMessage());
     }
 
-    /**
-     * 最终通知.
-     */
-    @After("pointCutMethod()")
-    public void doAfter() {
-        System.out.println("最终通知");
-    }
 
 }

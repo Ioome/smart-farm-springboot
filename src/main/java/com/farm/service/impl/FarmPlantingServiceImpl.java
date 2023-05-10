@@ -86,6 +86,7 @@ public class FarmPlantingServiceImpl extends ServiceImpl<FarmPlantingMapper, Far
         FarmAdmin farmAdmin = farmAdminMapper.selectById(userId);
         farmPlanting.setUsername(farmAdmin.getUsername());
         farmPlanting.setPhoneNumber(farmAdmin.getPhone());
+        //获取土地信息，拿到土地的id， 将新数据插入到计划
         farmPlantingMapper.insert(farmPlanting);
     }
 }

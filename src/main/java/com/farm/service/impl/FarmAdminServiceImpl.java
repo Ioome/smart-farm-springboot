@@ -125,7 +125,7 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
             throw new RuntimeException("退出失败");
         }
         Long userid = loginUser.getUser().getId();
-        redisCache.deleteObject("token_:" + userid);
+        redisCache.deleteObject("token_" + userid);
     }
 
     /**

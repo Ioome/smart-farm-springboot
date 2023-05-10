@@ -48,7 +48,7 @@ public class FarmPlantingController {
 
     @RequestMapping("/getPlanting")
     public Object load (@RequestBody FarmPlantingDto param) {
-        return farmPlantingService.load(param.getId());
+        return ResponseResult.success(farmPlantingService.load(param.getId()));
     }
 
 

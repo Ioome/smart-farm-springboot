@@ -154,6 +154,7 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         if (isNull(farmAdmin)) {
             throw new MyException("用户不存在或者未登录");
         }
+        farmAdmin.setUsername(dto.getUsername());
         farmAdmin.setNickName(dto.getNickName());
         farmAdmin.setPhone(dto.getPhone());
         farmAdmin.setEmail(dto.getEmail());

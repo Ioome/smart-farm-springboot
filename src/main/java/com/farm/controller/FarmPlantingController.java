@@ -5,7 +5,6 @@ import com.farm.entity.po.FarmPlanting;
 import com.farm.service.FarmPlantingService;
 import com.farm.utils.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +31,7 @@ public class FarmPlantingController {
 
 
     @RequestMapping("/insert")
-    public Object insert (FarmPlanting farmPlanting) {
+    public Object insert (@RequestBody FarmPlanting farmPlanting) {
         farmPlantingService.insertfarmPlanting(farmPlanting);
         return ResponseResult.success();
     }

@@ -2,6 +2,7 @@ package com.farm.entity.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -102,6 +103,7 @@ public class FarmEquipment implements Serializable {
      * 删除（null.正常)
      */
     @ApiModelProperty("删除（null.正常)")
+    @TableLogic
     private Date deleteTime;
 
     /**

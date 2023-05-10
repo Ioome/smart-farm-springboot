@@ -2,6 +2,7 @@ package com.farm.entity.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.farm.validation.TelephoneNumber;
 import com.farm.validation.group.RegisterGroup;
@@ -130,6 +131,7 @@ public class FarmAdmin implements Serializable {
      * 删除（null.正常)
      */
     @ApiModelProperty("删除（null.正常)")
+    @TableLogic
     private Date deleteTime;
 
     @ApiModelProperty("邮箱修改次数")

@@ -2,6 +2,7 @@ package com.farm.entity.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
@@ -118,6 +119,7 @@ public class FarmPermission implements Serializable {
      * 删除（null.正常)
      */
     @ApiModelProperty("删除（null.正常)")
+    @TableLogic
     private Date deleteTime;
 
     /**

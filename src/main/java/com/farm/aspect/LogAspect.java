@@ -44,7 +44,6 @@ public class LogAspect {
     @Around("pointCutMethod()")
     public Object logMethodExecutionTime (ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
-        Long userId = UserInfoUtils.getUserId();
         logger.info("Method " + joinPoint.getSignature().getName() + " started");
 
         Object result = joinPoint.proceed();

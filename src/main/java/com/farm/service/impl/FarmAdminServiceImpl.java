@@ -162,6 +162,7 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         farmAdmin.setNote(dto.getNote());
         FarmAdminVo farmAdminVo = new FarmAdminVo();
         BeanUtils.copyProperties(farmAdmin, farmAdminVo);
+        adminMapper.updateById(farmAdmin);
         LOGGER.info("用户 {}", farmAdmin);
         return farmAdminVo;
     }

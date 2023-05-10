@@ -1,6 +1,5 @@
 package com.farm.data.nio.server;
 
-import com.farm.utils.HexDecoder;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
@@ -27,6 +26,7 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
         logger.info("链接报告Port: {}", channel.localAddress().getPort());
         logger.info("链接报告完毕");
         channel.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
+        //导致不正常的代码
 //        channel.pipeline().addLast(new HexDecoder());
         channel.pipeline().addLast(new MyServerHandler());
 

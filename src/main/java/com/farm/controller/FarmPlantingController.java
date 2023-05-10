@@ -5,12 +5,16 @@ import com.farm.entity.po.FarmPlanting;
 import com.farm.service.FarmPlantingService;
 import com.farm.utils.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Map;
+
+import static java.util.Objects.isNull;
 
 /**
  * @author sutton
@@ -48,6 +52,9 @@ public class FarmPlantingController {
 
     @RequestMapping("/getPlanting")
     public Object load (@RequestBody FarmPlantingDto param) {
+        if (isNull(farmPlantingService.load(param.getId()))) {
+            return ResponseResult.success(new ArrayList<>());
+        }
         return ResponseResult.success(farmPlantingService.load(param.getId()));
     }
 

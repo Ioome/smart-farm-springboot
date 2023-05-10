@@ -3,7 +3,7 @@
 <mapper namespace="com.farm.mapper.FarmPlantMapper">
 
     <select id="getFunnel" resultType="com.farm.entity.vo.FarmPlantVo">
-        SELECT COUNT(DISTINCT plant_classification) AS value, plant_classification AS name
+        SELECT COUNT( plant_classification) AS value, plant_classification AS name
         FROM farm_plant
         GROUP BY plant_classification;
     </select>

@@ -1,5 +1,7 @@
 package com.farm.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class CorsConfig implements WebMvcConfigurer {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(CorsConfig.class);
+
     @Bean
     public CorsWebFilter corsWebFilter () {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -30,8 +34,8 @@ public class CorsConfig implements WebMvcConfigurer {
         corsConfiguration.addAllowedOriginPattern("*");
         // 是否允许携带cookie进行跨域
         corsConfiguration.setAllowCredentials(true);
-
         source.registerCorsConfiguration("/**", corsConfiguration);
+        LOGGER.info("过滤器");
         return new CorsWebFilter(source);
     }
 }

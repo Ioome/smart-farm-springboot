@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.dto.FarmAdminInfoDto;
 import com.farm.entity.po.FarmAdmin;
 import com.farm.entity.vo.FarmAdminVo;
+import com.farm.exception.FarmExceptionEnum;
 import com.farm.exception.MyException;
 import com.farm.mapper.FarmAdminMapper;
 import com.farm.service.FarmAdminService;
@@ -75,7 +76,7 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         farmAdmin.setStatus(1);
         List<FarmAdmin> umsAdminList = adminMapper.selectList(new QueryWrapper<FarmAdmin>().lambda().eq(FarmAdmin::getUsername, umsAdminParam.getUsername()));
         if (!umsAdminList.isEmpty()) {
-            throw new MyException("该用户名已存在");
+            throw new MyException(FarmExceptionEnum.NAME_EXISTED.getCode(), "该用户名已存在");
         }
         String encodePassword = passwordEncoder.encode(farmAdmin.getPassword());
         farmAdmin.setPassword(encodePassword);

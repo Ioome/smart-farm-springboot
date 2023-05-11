@@ -11,16 +11,16 @@ import javax.annotation.Resource;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(WebMvcConfig.class);
-    @Resource
-    private CorsInterceptor corsInterceptor;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        LOGGER.info("拦截器前");
-        // 跨域拦截器需放在最上面
-        registry.addInterceptor(corsInterceptor).addPathPatterns("/**");
-        LOGGER.info("拦截器后");
-    }
+//    private final static Logger LOGGER = LoggerFactory.getLogger(WebMvcConfig.class);
+//    @Resource
+//    private CorsInterceptor corsInterceptor;
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        LOGGER.info("拦截器前");
+//        // 跨域拦截器需放在最上面
+//        registry.addInterceptor(corsInterceptor).addPathPatterns("/**");
+//        LOGGER.info("拦截器后");
+//    }
 
 }

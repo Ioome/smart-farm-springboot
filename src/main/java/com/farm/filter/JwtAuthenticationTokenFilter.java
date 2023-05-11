@@ -49,6 +49,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             logger.info(token);
             logger.info("filter");
+            return;
         }
         String userid;
         try {

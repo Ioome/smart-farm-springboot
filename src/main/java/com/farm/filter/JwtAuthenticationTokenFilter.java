@@ -44,10 +44,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //从请求头中获取token
         String token = request.getHeader("token");
-        //StringUtils.hasText(token) 判断字符串是否有值
         if (!StringUtils.hasText(token)) {
             //放行
             filterChain.doFilter(request, response);
+            logger.info(token);
+            logger.info("filter");
             return;
         }
         String userid;

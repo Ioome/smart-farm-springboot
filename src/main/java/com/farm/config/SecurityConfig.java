@@ -105,8 +105,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .permitAll()
                 .antMatchers("/api/admin/login", "/api/admin/register", "/api/admin/logout", "/api/admin/getPublicKey")
-//                .permitAll()
-//                .antMatchers(HttpMethod.OPTIONS)
+                .permitAll()
+                .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
 //                .antMatchers("/**")//测试时全部运行访问
 //                .permitAll()

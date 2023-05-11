@@ -31,7 +31,7 @@ public class CorsInterceptor implements HandlerInterceptor {
         if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
             response.setStatus(HttpStatus.NO_CONTENT.value());
             LOGGER.info("请求到这了");
-            return true;
+            return false;
         }
         return true;
     }

@@ -1,4 +1,4 @@
-FROM openjdk:8-jre
+FROM openjdk:8-jre-alpine
 MAINTAINER sutton
 WORKDIR /
 ADD target/smart-farm-springboot-0.0.1-SNAPSHOT.jar farm-smart.jar

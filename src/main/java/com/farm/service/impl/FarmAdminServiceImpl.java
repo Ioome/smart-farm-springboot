@@ -14,6 +14,7 @@ import com.farm.mapper.FarmAdminMapper;
 import com.farm.service.FarmAdminService;
 import com.farm.service.admin.AdminUserDetails;
 import com.farm.utils.JwtUtil;
+import com.farm.utils.RSAUtil;
 import com.farm.utils.RedisCache;
 import com.farm.utils.UserInfoUtils;
 import org.slf4j.Logger;
@@ -192,5 +193,15 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         if (update <= 0) {
             throw new MyException("修改失败");
         }
+    }
+
+    /**
+     * 生成公钥
+     *
+     * @return 生成公钥
+     */
+    @Override
+    public String getPublicKey () {
+        return RSAUtil.generateBase64PublicKey();
     }
 }

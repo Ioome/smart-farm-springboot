@@ -90,6 +90,12 @@ public class FarmUserAdminController {
         return ResponseResult.success("退出成功");
     }
 
+    @ApiOperation(value = "生成公钥")
+    @GetMapping(value = "/getPublicKey")
+    public Object getPublicKey () {
+        return ResponseResult.success(new HashMap<String, String>().put("publicKey", farmAdminService.getPublicKey()));
+    }
+
 
     @ApiOperation("密码修改")
     @PostMapping(value = "/updatePassword")

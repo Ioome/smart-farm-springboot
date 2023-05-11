@@ -61,4 +61,12 @@ public interface FarmAdminService extends IService<FarmAdmin> {
      * 修改用户名密码
      */
     void updatePassword (FarmPassWordVo farmPassWordVo);
+
+
+    /**
+     * 生成公钥
+     *
+     * @return 生成公钥
+     */
+    String getPublicKey ();
 }

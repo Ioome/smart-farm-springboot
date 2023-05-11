@@ -3,6 +3,8 @@ package com.farm.config;
 import com.farm.filter.JwtAuthenticationTokenFilter;
 import com.farm.handler.RestAuthenticationEntryPoint;
 import com.farm.handler.RestfulAccessDeniedHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +33,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    private final static Logger LOGGER = LoggerFactory.getLogger(SecurityConfig.class);
 
     /**
      * @description: 用于配置需要拦截的url路径、jwt过滤器
@@ -45,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
+
 
     /**
      * @description: 用于处理认证失败（无token）的类
@@ -101,7 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs/**"
                 )
                 .permitAll()
-                .antMatchers("/api/admin/login", "/api/admin/register", "/api/admin/logout","/api/admin/getPublicKey")
+                .antMatchers("/api/admin/login", "/api/admin/register", "/api/admin/logout", "/api/admin/getPublicKey")
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
@@ -110,6 +113,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()// 除上面外的所有请求全部需要鉴权认证
                 .authenticated();
         //把token校验过滤器添加到过滤器链中
+        LOGGER.info("sercurity");
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         //添加自定义未授权和未登录结果返回
         http.exceptionHandling()

@@ -1,5 +1,7 @@
 package com.farm.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -14,8 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class CorsInterceptor implements HandlerInterceptor {
 
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(CorsInterceptor.class);
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle (HttpServletRequest request, HttpServletResponse response, Object handler) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS");
@@ -25,6 +30,7 @@ public class CorsInterceptor implements HandlerInterceptor {
         // 如果是OPTIONS则结束请求
         if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
             response.setStatus(HttpStatus.NO_CONTENT.value());
+            LOGGER.info("请求到这了");
             return false;
         }
         return true;

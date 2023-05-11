@@ -93,7 +93,7 @@ public class FarmUserAdminController {
     @ApiOperation(value = "生成公钥")
     @GetMapping(value = "/getPublicKey")
     public Object getPublicKey () {
-        return ResponseResult.success(new HashMap<String, String>().put("publicKey", farmAdminService.getPublicKey()));
+        return ResponseResult.success(farmAdminService.getPublicKey());
     }
 
 

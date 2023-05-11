@@ -1,10 +1,13 @@
 package com.farm.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.dto.FarmAdminInfoDto;
 import com.farm.entity.po.FarmAdmin;
 import com.farm.entity.vo.FarmAdminVo;
+import com.farm.entity.vo.FarmPassWordVo;
 import com.farm.exception.FarmExceptionEnum;
 import com.farm.exception.MyException;
 import com.farm.mapper.FarmAdminMapper;
@@ -26,7 +29,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import static java.util.Objects.isNull;
 
@@ -167,5 +169,28 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         adminMapper.updateById(farmAdmin);
         LOGGER.info("用户 {}", farmAdmin);
         return farmAdminVo;
+    }
+
+    /**
+     * 修改用户名密码
+     */
+    @Override
+    public void updatePassword (FarmPassWordVo farmPassWordVo) {
+        Long userId = UserInfoUtils.getUserId();
+        if (farmPassWordVo == null || StrUtil.isBlank(farmPassWordVo.getOldPassword()) || StrUtil.isBlank(farmPassWordVo.getNewPassword())) {
+            throw new MyException("旧密码或新密码为空");
+        }
+        FarmAdmin farmAdmin = adminMapper.selectOne(new QueryWrapper<FarmAdmin>().lambda().eq(FarmAdmin::getId, userId));
+        boolean matches = passwordEncoder.matches(farmPassWordVo.getOldPassword(), farmAdmin.getPassword());
+        if (!matches) {
+            LOGGER.info("旧密码错误");
+            throw new MyException(FarmExceptionEnum.WRONG_PASSWORD.getCode(), FarmExceptionEnum.WRONG_PASSWORD.getMessage());
+        }
+        String encode = passwordEncoder.encode(farmPassWordVo.getNewPassword());
+        LOGGER.info(encode);
+        int update = adminMapper.update(null, new UpdateWrapper<FarmAdmin>().lambda().eq(FarmAdmin::getId, userId).set(FarmAdmin::getPassword, encode));
+        if (update <= 0) {
+            throw new MyException("修改失败");
+        }
     }
 }

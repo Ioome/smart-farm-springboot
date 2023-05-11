@@ -3,6 +3,7 @@ package com.farm.controller;
 import com.farm.entity.dto.FarmAdminInfoDto;
 import com.farm.entity.po.FarmAdmin;
 import com.farm.entity.vo.FarmAdminVo;
+import com.farm.entity.vo.FarmPassWordVo;
 import com.farm.exception.MyException;
 import com.farm.service.FarmAdminService;
 import com.farm.utils.ResponseResult;
@@ -87,6 +88,14 @@ public class FarmUserAdminController {
     public Object logout () {
         farmAdminService.logout();
         return ResponseResult.success("退出成功");
+    }
+
+
+    @ApiOperation("密码修改")
+    @PostMapping(value = "/updatePassword")
+    public Object updatePassword (@RequestBody FarmPassWordVo farmPassWordVo) {
+        farmAdminService.updatePassword(farmPassWordVo);
+        return ResponseResult.success();
     }
 
 
